@@ -1,0 +1,23 @@
+.table > tbody > tr.gold > td { background-color: #FFEF96 }
+.table > tbody > tr.silver > td { background-color: #E5E5E5 }
+.table > tbody > tr.bronze > td { background-color: #CAA077 }
+.table-hover > tbody > tr.gold:hover > td { background-color: #FFE34C }
+.table-hover > tbody > tr.silver:hover > td { background-color: #CDCDCD }
+.table-hover > tbody > tr.bronze:hover > td { background-color: #B88048 }
+.table {
+    border-top: solid 1px #ddd; border-bottom: solid 1px #ddd;
+    opacity: 0.1;
+}
+.table .label { display: inline-block; width: 40px }
+.table, .table .club,
+.table .region, .table .age,
+.table .gender, .table .ranking {
+    border-left: solid 1px #ddd; border-right: solid 1px #ddd
+}
+.table .pid {
+    border-left: solid 1px #ddd
+}
+.table .pidlink {
+    border-right: solid 1px #ddd
+}
+.table > tbody > tr { cursor: pointer }
