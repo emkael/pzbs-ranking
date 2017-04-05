@@ -8,6 +8,9 @@
     border-top: solid 1px #ddd; border-bottom: solid 1px #ddd;
     opacity: 0.1;
 }
+.table.history {
+    opacity: 1;
+}
 .table .label { display: inline-block; width: 40px }
 .table, .table .club,
 .table .region, .table .age,
@@ -21,3 +24,17 @@
     border-right: solid 1px #ddd
 }
 .table > tbody > tr { cursor: pointer }
+.table-bordered > tbody .place,
+.table-bordered > tbody .age-place,
+.table-bordered > tbody .gender-place,
+.table-bordered > tbody .region-place {
+    border-right: none;
+}
+.table-bordered > tbody .place-change,
+.table-bordered > tbody .age-place-change,
+.table-bordered > tbody .gender-place-change,
+.table-bordered > tbody .region-place-change {
+    border-left: none;
+}
+.table > thead th { text-align: center }
+.table.history > tbody > tr { cursor: auto }
