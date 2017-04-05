@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ranking PZBS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="res/ranking.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>
+          Ranking PZBS
+          <small></small>
+        </h1>
+      </div>
+      <div class="panel panel-default filters">
+        <div class="panel-heading">
+          Filtry rankingu
+        </div>
+        <div class="panel-body">
+          <p>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-disabled">Okręg</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="DS">DS</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="KP">KP</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="LB">LB</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="LD">LD</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="LU">LU</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="MA">MA</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="MP">MP</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="OP">OP</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="PD">PD</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="PK">PK</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="PM">PM</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="SL">SL</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="SW">SW</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="WM">WM</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="WP">WP</button>
+              <button type="button" class="btn btn-default" data-filter="region" data-value="ZP">ZP</button>
+              <button type="button" class="btn btn-default" data-clear="region">wszystkie</button>
+            </div>
+          </p>
+          <p>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-disabled">Płeć</button>
+              <button type="button" class="btn btn-default" data-filter="gender" data-value="K">K</button>
+              <button type="button" class="btn btn-default" data-filter="gender" data-value="M">M</button>
+              <button type="button" class="btn btn-default" data-clear="gender">obie</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-disabled">Kat. wiekowa</button>
+              <button type="button" class="btn btn-default" data-filter="age" data-value="M">M</button>
+              <button type="button" class="btn btn-default" data-filter="age" data-value="J">J</button>
+              <button type="button" class="btn btn-default" data-filter="age" data-value="">-</button>
+              <button type="button" class="btn btn-default" data-filter="age" data-value="S">S</button>
+              <button type="button" class="btn btn-default" data-filter="age" data-value="N">N</button>
+              <button type="button" class="btn btn-default" data-clear="age">wszyscy</button>
+            </div>
+          </p>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr class="text-center">
+            <th colspan="2">Miejsce</th>
+            <th class="pid" colspan="2">PID</th>
+            <th>Zawodnik</th>
+            <th class="club">Klub</th>
+            <th class="region" colspan="3">Okręg</th>
+            <th class="gender" colspan="3">Płeć</th>
+            <th class="age" colspan="3">Kat. wiekowa</th>
+            <th class="ranking">Wynik</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="place text-right">
+              <span class="rank"></span>
+            </td>
+            <td class="place">
+              <span class="change label"></span>
+            </td>
+            <td class="pid text-right"></td>
+            <td class="pidlink">
+              <a href="" target="_blank">
+                <span class="glyphicon glyphicon-new-window"></span>
+              </a>
+            </td>
+            <td class="name"></td>
+            <td class="club"></td>
+            <td class="region text-center"></td>
+            <td class="region-place text-right">
+              <span class="rank"></span>
+            </td>
+            <td class="region-place">
+              <span class="change label"></span>
+            </td>
+            <td class="gender text-center"></td>
+            <td class="gender-place text-right">
+              <span class="rank"></span>
+            </td>
+            <td class="gender-place">
+              <span class="change label"></span>
+            </td>
+            <td class="age text-center"></td>
+            <td class="age-place text-right">
+              <span class="rank"></span>
+            </td>
+            <td class="age-place">
+              <span class="change label"></span>
+            </td>
+            <td class="ranking text-right"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="res/ranking.js"></script>
+  </body>
+</html>
