@@ -78,7 +78,7 @@ table = bs4(file('templates/ranking.html'), 'lxml')
 table_body = table.select('tbody')[0]
 table_row = table_body.select('tr')[0].extract()
 
-table.select('.page-header h1 small')[0].string = 'z dnia %s' % (
+table.select('.page-header h1 small')[0].string = 'stan na %s' % (
     '.'.join(sys.argv[1].split('-')[::-1])
 )
 
