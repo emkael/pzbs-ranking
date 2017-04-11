@@ -1,7 +1,7 @@
 import json
 import mysql.connector
 
-settings = json.load(file('config.json'))
+settings = json.load(file('config/db.json'))
 
 connection = mysql.connector.connect(
     user=settings['user'],
