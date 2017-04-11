@@ -59,60 +59,73 @@
           </p>
         </div>
       </div>
-      <table class="table table-striped table-hover table-condensed">
-        <thead>
-          <tr class="text-center">
-            <th colspan="2">Miejsce</th>
-            <th class="pid" colspan="2">PID</th>
-            <th>Zawodnik</th>
-            <th class="club">Klub</th>
-            <th class="region" colspan="3">Okręg</th>
-            <th class="gender" colspan="3">Płeć</th>
-            <th class="age" colspan="3">Kat. wiekowa</th>
-            <th class="ranking">Wynik</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="place text-right">
-              <span class="rank"></span>
-            </td>
-            <td class="place">
-              <span class="change label"></span>
-            </td>
-            <td class="pid text-right"></td>
-            <td class="pidlink">
-              <a href="" target="_blank">
-                <span class="glyphicon glyphicon-new-window"></span>
-              </a>
-            </td>
-            <td class="name"></td>
-            <td class="club"></td>
-            <td class="region text-center"></td>
-            <td class="region-place text-right">
-              <span class="rank"></span>
-            </td>
-            <td class="region-place">
-              <span class="change label"></span>
-            </td>
-            <td class="gender text-center"></td>
-            <td class="gender-place text-right">
-              <span class="rank"></span>
-            </td>
-            <td class="gender-place">
-              <span class="change label"></span>
-            </td>
-            <td class="age text-center"></td>
-            <td class="age-place text-right">
-              <span class="rank"></span>
-            </td>
-            <td class="age-place">
-              <span class="change label"></span>
-            </td>
-            <td class="ranking text-right"></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="button" data-toggle="collapse" data-target="#editions" aria-expanded="false" aria-controls="editions">
+          Wszystkie notowania rankingu
+        </div>
+        <div class="collapse panel-body" id="editions">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-disabled year" />
+            <a href="" class="btn btn-default" datetime=""></a>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-condened">
+          <thead>
+            <tr class="text-center">
+              <th colspan="2">Miejsce</th>
+              <th class="pid" colspan="2">PID</th>
+              <th>Zawodnik</th>
+              <th class="club">Klub</th>
+              <th class="region" colspan="3">Okręg</th>
+              <th class="gender" colspan="3">Płeć</th>
+              <th class="age" colspan="3">Kat. wiekowa</th>
+              <th class="ranking">Wynik</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="place text-right">
+                <span class="rank"></span>
+              </td>
+              <td class="place">
+                <span class="change label"></span>
+              </td>
+              <td class="pid text-right"></td>
+              <td class="pidlink">
+                <a href="" target="_blank">
+                  <span class="glyphicon glyphicon-new-window"></span>
+                </a>
+              </td>
+              <td class="name"></td>
+              <td class="club"></td>
+              <td class="region text-center"></td>
+              <td class="region-place text-right">
+                <span class="rank"></span>
+              </td>
+              <td class="region-place">
+                <span class="change label"></span>
+              </td>
+              <td class="gender text-center"></td>
+              <td class="gender-place text-right">
+                <span class="rank"></span>
+              </td>
+              <td class="gender-place">
+                <span class="change label"></span>
+              </td>
+              <td class="age text-center"></td>
+              <td class="age-place text-right">
+                <span class="rank"></span>
+              </td>
+              <td class="age-place">
+                <span class="change label"></span>
+              </td>
+              <td class="ranking text-right"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="well well-sm">
         &copy; 2017 - dla <a href="http://pzbs.pl">PZBS</a> zrobił <a href="https://emkael.info">mkl.</a> Też sobie <a href="https://github.com/emkael/pzbs-ranking">zrób.</a>
       </div>
