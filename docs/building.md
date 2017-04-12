@@ -10,6 +10,12 @@ To build subsequent rankings:
 python ranking.py DATE PREVIOUS_DATE > http/FILENAME.html
 ```
 
+To compile edition list header into ranking:
+
+```
+python editions.py DATE_CONFIG http/FILENAME.html
+```
+
 To build players' pages:
 ```
 python players.py http/players/ [DATES_CONFIG]
