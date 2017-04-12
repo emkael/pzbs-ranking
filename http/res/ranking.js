@@ -173,8 +173,8 @@ var ranking = {
         });
 
         $('button[data-filter]').click(function() {
-            $('table.table-paginate').paginate('clear');
             $('table.table').css('opacity', 0.1);
+            $('table.table-paginate').paginate('clear');
             var button = $(this);
             var params = ranking.parseHash(location.hash);
             var param = params.get(button.attr('data-filter'));
@@ -198,8 +198,8 @@ var ranking = {
         });
 
         $('button[data-clear]').click(function() {
-            $('table.table-paginate').paginate('clear');
             $('table.table').css('opacity', 0.1);
+            $('table.table-paginate').paginate('clear');
             var button = $(this);
             var params = ranking.parseHash(location.hash);
             params.delete(button.attr('data-clear'));
