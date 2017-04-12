@@ -92,16 +92,17 @@ var ranking = {
             }
         });
         if (paramsChanged) {
+            $('table.table-paginate').paginate('clear');
             ranking.filterRows(params);
             ranking.savedParams = params;
         }
-        $('table.table tbody tr:visible').eq(0).addClass('gold');
-        $('table.table tbody tr:visible').eq(1).addClass('silver');
-        $('table.table tbody tr:visible').eq(2).addClass('bronze');
         $('table.table').css('opacity', 1);
         var pagesize = 40;
         var page = params.get('page') || [0];
         var count = $('table.table-paginate').paginate(pagesize, parseInt(page[0]));
+        $('table.table tbody tr[data-paginate-visible=1]').eq(0).addClass('gold');
+        $('table.table tbody tr[data-paginate-visible=1]').eq(1).addClass('silver');
+        $('table.table tbody tr[data-paginate-visible=1]').eq(2).addClass('bronze');
         ranking.buildPaginator('#top-paginator', count, pagesize, page[0] || 1);
         ranking.buildPaginator('#bottom-paginator', count, pagesize, page[0] || 1);
     },
@@ -169,10 +170,7 @@ var ranking = {
         $('.container .table tbody tr').click(ranking.playerClick);
 
         $(document).ready(function() {
-            $(window).on('hashchange', function() {
-                $('table.table-paginate').paginate('clear');
-                ranking.readHash();
-            }).trigger('hashchange');
+            $(window).on('hashchange', ranking.readHash).trigger('hashchange');
         });
 
         $('button[data-filter]').click(function() {
