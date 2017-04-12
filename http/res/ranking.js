@@ -46,8 +46,8 @@ var ranking = {
         }
     },
 
-    parseHash : function() {
-        var hash = location.hash.replace(/^#/, '');
+    parseHash : function(hash) {
+        hash = hash.replace(/^#/, '');
         var hashParams = hash.split(';');
         var params = new Map();
         hashParams.forEach(function(hashParam) {
@@ -65,23 +65,40 @@ var ranking = {
         }).join(';');
     },
 
+    savedParams : new Map(),
+
     readHash : function() {
-        $('button.btn-primary').removeClass('btn-primary');
-        var params = ranking.parseHash();
-        params.forEach(function(values, param) {
-            values.forEach(function(value) {
-                $('button[data-filter="' + param + '"][data-value="' + value + '"]').addClass('btn-primary');
-            });
-        });
+        var params = ranking.parseHash(location.hash);
         var allParams = ['age', 'gender', 'region'];
+        var paramsChanged = false;
         allParams.forEach(function(param) {
-            if ($('button[data-filter="' + param + '"].btn-primary').size() == 0) {
-                $('button[data-clear="' + param + '"]').addClass('btn-primary');
-            } else {
-                $('#filters').collapse();
+            var newParam = params.get(param) || [];
+            var oldParam = ranking.savedParams.get(param) || [];
+            if (newParam.join(',') != oldParam.join(',')) {
+                paramsChanged = true;
             }
         });
-        ranking.filterRows(params);
+        if (paramsChanged) {
+            $('button.btn-primary').removeClass('btn-primary');
+            params.forEach(function(values, param) {
+                values.forEach(function(value) {
+                    $('button[data-filter="' + param + '"][data-value="' + value + '"]').addClass('btn-primary');
+                });
+            });
+            allParams.forEach(function(param) {
+                if ($('button[data-filter="' + param + '"].btn-primary').size() == 0) {
+                    $('button[data-clear="' + param + '"]').addClass('btn-primary');
+                } else {
+                    $('#filters').collapse();
+                }
+            });
+            ranking.filterRows(params);
+            ranking.savedParams = params;
+        }
+        $('table.table tbody tr:visible').eq(0).addClass('gold');
+        $('table.table tbody tr:visible').eq(1).addClass('silver');
+        $('table.table tbody tr:visible').eq(2).addClass('bronze');
+        $('table.table').css('opacity', 1);
         var pagesize = 40;
         var page = params.get('page') || [0];
         var count = $('table.table-paginate').paginate(pagesize, parseInt(page[0]));
@@ -105,10 +122,6 @@ var ranking = {
                 row.show();
             }
         });
-        $('table.table tbody tr:visible').eq(0).addClass('gold');
-        $('table.table tbody tr:visible').eq(1).addClass('silver');
-        $('table.table tbody tr:visible').eq(2).addClass('bronze');
-        $('table.table').css('opacity', 1);
     },
 
     buildPaginator: function(selector, count, pagesize, page) {
@@ -133,7 +146,7 @@ var ranking = {
         $('table.table').css('opacity', 0.1);
         var btn = $(this);
         var page = parseInt(btn.attr('data-page'));
-        var params = ranking.parseHash();
+        var params = ranking.parseHash(location.hash);
         var currentPage = params.get('page');
         currentPage = currentPage ? parseInt(currentPage[0]) : 1;
         if (btn.hasClass('paginator-prev')) {
@@ -163,7 +176,7 @@ var ranking = {
             $('table.table-paginate').paginate('clear');
             $('table.table').css('opacity', 0.1);
             var button = $(this);
-            var params = ranking.parseHash();
+            var params = ranking.parseHash(location.hash);
             var param = params.get(button.attr('data-filter'));
             var value = button.attr('data-value');
             var index = param ? param.indexOf(value) : -1;
@@ -188,7 +201,7 @@ var ranking = {
             $('table.table-paginate').paginate('clear');
             $('table.table').css('opacity', 0.1);
             var button = $(this);
-            var params = ranking.parseHash();
+            var params = ranking.parseHash(location.hash);
             params.delete(button.attr('data-clear'));
             params.delete('page');
             location.hash = ranking.constructHash(params);
