@@ -74,7 +74,7 @@ var ranking = {
         allParams.forEach(function(param) {
             var newParam = params.get(param) || [];
             var oldParam = ranking.savedParams.get(param) || [];
-            if (newParam.join(',') != oldParam.join(',')) {
+            if (newParam.length != oldParam.length || newParam.join(',') != oldParam.join(',')) {
                 paramsChanged = true;
             }
         });
@@ -169,12 +169,14 @@ var ranking = {
         $('.container .table tbody tr').click(ranking.playerClick);
 
         $(document).ready(function() {
-            $(window).on('hashchange', ranking.readHash).trigger('hashchange');
+            $(window).on('hashchange', function() {
+                $('table.table-paginate').paginate('clear');
+                ranking.readHash();
+            }).trigger('hashchange');
         });
 
         $('button[data-filter]').click(function() {
             $('table.table').css('opacity', 0.1);
-            $('table.table-paginate').paginate('clear');
             var button = $(this);
             var params = ranking.parseHash(location.hash);
             var param = params.get(button.attr('data-filter'));
@@ -199,7 +201,6 @@ var ranking = {
 
         $('button[data-clear]').click(function() {
             $('table.table').css('opacity', 0.1);
-            $('table.table-paginate').paginate('clear');
             var button = $(this);
             var params = ranking.parseHash(location.hash);
             params.delete(button.attr('data-clear'));
