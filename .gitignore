@@ -1,1 +1,4 @@
 *.pyc
+http/*.html
+http/test
+http/players
