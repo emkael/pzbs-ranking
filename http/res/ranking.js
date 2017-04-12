@@ -78,20 +78,20 @@ var ranking = {
                 paramsChanged = true;
             }
         });
+        $('button.btn-primary').removeClass('btn-primary');
+        params.forEach(function(values, param) {
+            values.forEach(function(value) {
+                $('button[data-filter="' + param + '"][data-value="' + value + '"]').addClass('btn-primary');
+            });
+        });
+        allParams.forEach(function(param) {
+            if ($('button[data-filter="' + param + '"].btn-primary').size() == 0) {
+                $('button[data-clear="' + param + '"]').addClass('btn-primary');
+            } else {
+                $('#filters').collapse();
+            }
+        });
         if (paramsChanged) {
-            $('button.btn-primary').removeClass('btn-primary');
-            params.forEach(function(values, param) {
-                values.forEach(function(value) {
-                    $('button[data-filter="' + param + '"][data-value="' + value + '"]').addClass('btn-primary');
-                });
-            });
-            allParams.forEach(function(param) {
-                if ($('button[data-filter="' + param + '"].btn-primary').size() == 0) {
-                    $('button[data-clear="' + param + '"]').addClass('btn-primary');
-                } else {
-                    $('#filters').collapse();
-                }
-            });
             ranking.filterRows(params);
             ranking.savedParams = params;
         }
