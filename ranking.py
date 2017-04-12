@@ -1,12 +1,11 @@
-import copy, json, sys
+import copy, sys
 from bs4 import BeautifulSoup as bs4
 
 from pyranking.fetch import fetch_ranking
 
-dates_config = json.load(file(sys.argv[1]))
-ranking_date = sys.argv[2]
+ranking_date = sys.argv[1]
 ranking = fetch_ranking(ranking_date)
-old_ranking = fetch_ranking(sys.argv[3], True) if len(sys.argv) > 3 else {}
+old_ranking = fetch_ranking(sys.argv[2], True) if len(sys.argv) > 2 else {}
 
 for row in ranking:
     if row['pid'] in old_ranking:
@@ -54,26 +53,5 @@ for row in ranking:
         if row[category + '-place'] == 1:
             new_row['class'] = new_row.get('class', []) + ['info']
     table_body.append(new_row)
-
-editions = {}
-for date, link in dates_config.iteritems():
-    year = date.split('-')[0]
-    if year not in editions:
-        editions[year] = []
-    editions[year].append(('.'.join(date.split('-')[::-1][0:2]), link, date))
-
-date_group = table.select('#editions')[0]
-year_group = date_group.select('div[role="group"]')[0].extract()
-ranking_link = year_group.select('.btn-default')[0].extract()
-for year, dates in editions.iteritems():
-    group = copy.copy(year_group)
-    group.select('.year')[0].string = str(year)
-    for date in dates:
-        link = copy.copy(ranking_link)
-        link.string = date[0]
-        link['href'] = date[1]
-        link['datetime'] = date[2]
-        group.append(link)
-    date_group.append(group)
 
 print table.prettify().encode('utf-8')
