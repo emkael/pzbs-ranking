@@ -2,15 +2,19 @@ import copy, json, sys
 
 from bs4 import BeautifulSoup as bs4
 
-dates_config = json.load(file(sys.argv[1]))
-output_file = bs4(file(sys.argv[2]), 'lxml')
+dates_config = json.load(file('config/dates.json'))
+output_file = bs4(file(sys.argv[1]), 'lxml')
 
 editions = {}
-for date, link in dates_config.iteritems():
-    year = date.split('-')[0]
+for date_config in dates_config:
+    year = date_config['name'].split(' ')[1]
     if year not in editions:
         editions[year] = []
-    editions[year].append(('.'.join(date.split('-')[::-1][0:2]), link, date))
+    editions[year].append((
+        '%s (%s)' % (date_config['name'].split(' ')[0], date_config['index']),
+        date_config['url'],
+        date_config['date']
+    ))
 
 template = bs4(file('templates/ranking.html'), 'lxml')
 
@@ -20,7 +24,7 @@ ranking_link = year_group.select('.btn-default')[0].extract()
 for year, dates in editions.iteritems():
     group = copy.copy(year_group)
     group.select('.year')[0].string = str(year)
-    for date in dates:
+    for date in dates[::-1]:
         link = copy.copy(ranking_link)
         link.string = date[0]
         link['href'] = date[1]
@@ -29,4 +33,4 @@ for year, dates in editions.iteritems():
     date_group.append(group)
 
 output_file.select('#editions')[0].replace_with(date_group)
-file(sys.argv[2], 'w').write(output_file.prettify().encode('utf-8'))
+file(sys.argv[1], 'w').write(output_file.prettify().encode('utf-8'))

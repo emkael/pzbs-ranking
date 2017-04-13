@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup as bs4
 from pyranking.fetch import fetch_ranking
 
 output_directory = sys.argv[1]
-config_file = sys.argv[2] if len(sys.argv) > 2 else 'dates.json'
 
-dates = json.load(file(config_file))
+dates = {}
+for date_config in json.load(file('config/dates.json')):
+    dates[date_config['date']] = date_config['url']
 
 players = {}
 
