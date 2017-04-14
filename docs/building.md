@@ -1,13 +1,13 @@
 To build initial ranking:
 
 ```
-python ranking.py DATE > http/FILENAME.html
+python ranking.py RANKING_NAME RANKING_INDEX DATE > http/FILENAME.html
 ```
 
 To build subsequent rankings:
 
 ```
-python ranking.py DATE PREVIOUS_DATE > http/FILENAME.html
+python ranking.py RANKING_NAME RANKING_INDEX DATE PREVIOUS_DATE > http/FILENAME.html
 ```
 
 To compile edition list header into ranking:
