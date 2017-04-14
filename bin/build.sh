@@ -9,7 +9,7 @@ cat config/dates.json |
     xargs -n4 |
     while read DATE URL INDEX NAME
     do
-        python ranking.py $DATE $PREV_DATE > $DIR/$URL
+        python ranking.py "$NAME" $INDEX $DATE $PREV_DATE > $DIR/$URL
         PREV_DATE=$DATE
     done
 find $DIR -maxdepth 1 -type f -name \*.html |

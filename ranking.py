@@ -3,9 +3,12 @@ from bs4 import BeautifulSoup as bs4
 
 from pyranking.fetch import fetch_ranking
 
-ranking_date = sys.argv[1]
+ranking_date = sys.argv[3]
+subtitle = 'notowanie %s (%s), stan na %s' % (
+    sys.argv[1], sys.argv[2], '.'.join(ranking_date.split('-')[::-1])
+)
 ranking = fetch_ranking(ranking_date)
-old_ranking = fetch_ranking(sys.argv[2], True) if len(sys.argv) > 2 else {}
+old_ranking = fetch_ranking(sys.argv[4], True) if len(sys.argv) > 4 else {}
 
 for row in ranking:
     if row['pid'] in old_ranking:
@@ -28,9 +31,7 @@ table = bs4(file('templates/ranking.html'), 'lxml')
 table_body = table.select('tbody')[0]
 table_row = table_body.select('tr')[0].extract()
 
-table.select('.page-header h1 small')[0].string = 'stan na %s' % (
-    '.'.join(ranking_date.split('-')[::-1])
-)
+table.select('.page-header h2 small')[0].string = subtitle
 
 for row in ranking:
     new_row = copy.copy(table_row)
