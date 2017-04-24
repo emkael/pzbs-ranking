@@ -13,7 +13,7 @@ After importing ranking CSV to `temp_rankings`, copy to `rankings` with current 
 
 ```
 INSERT INTO rankings (
-       SELECT pid, `date`, place, score, region, flags \
+       SELECT pid, `date`, place, score, region, flags
        FROM temp_rankings
        JOIN players
             ON players.id = temp_rankings.pid
