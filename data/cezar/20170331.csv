@@ -1,4 +1,3 @@
-PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 01000;Jan;Amarowicz;3.0;PK;S;;;
 01001;Andrzej;Ankiersztejn;4.0;PK;S;"LAST Rzeszów";T;T
 01002;Andrzej;Antosz;2.0;PK;S;;;
@@ -2050,7 +2049,7 @@ PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 03656;Marian;Lemecha;1.0;WM;N;"ZORRO-17 Olsztyn";T;T
 03657;Patrycja;Burmistrzak;0.0;KP;K;;;
 03658;Czesław;Bury;4.0;KP;N;"Famor Bydgoszcz";T;T
-03660;Antoni;Zubowicz;1.0;WM;S;"ZORRO-17 Olsztyn";T;T
+03660;Antoni;Zubowicz;0.5;WM;S;;;
 03661;Leonard;Dubowik;0.0;WM;S;"SM Odrodzenie Szczytno";T;T
 03663;Adam;Chełchowski;4.0;KP;S;"Tucholanka Tuchola";T;T
 03667;Stanisław;Ciesielski;5.0;KP;N;"Famor Bydgoszcz";T;T
@@ -7057,7 +7056,7 @@ PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 09700;Aleksander;Kot;5.0;MA;;;;
 09701;Małgorzata;Jeleniewska;11.0;MA;K;;;
 09702;Sławomir;Sierocki;4.0;MA;;"MKS Arnica Przasnysz";;T
-09703;Czesław;Szur;4.0;PM;N;"Gdańskie Towarzystwo Brydżowe";T;T
+09703;Czesław;Szur;4.0;PM;N;;;
 09704;Jarosław;Mróz;2.5;WM;;"Sprawni Inaczej Olsztyn";;T
 09706;Michał;Marciniak;3.0;MA;N;;;
 09707;Janusz;Marszałkiewicz;3.0;MA;;;;
@@ -11325,7 +11324,7 @@ PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 14103;Agnieszka;Porowska;1.5;MA;KJ;;;
 14104;Marek;Ławicki;0.0;LU;;;;
 14105;Błażej;Szulecki;3.0;PM;;;;
-14106;Ryszard;Zawadowicz;2.0;PM;S;"DK-SM Rumia Janowo II";;T
+14106;Ryszard;Zawadowicz;2.0;PM;S;"DK-SM Rumia Janowo II";;
 14107;Jan;Milczek;1.0;PM;J;;;
 14108;Joanna;Janczewska;0.0;MA;KJ;;;
 14109;Tomasz;Kleszcz;0.0;MA;J;;;
@@ -11515,7 +11514,7 @@ PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 14298;Katarzyna;Zielińska;0.0;MA;KJ;;;
 14299;Patryk;Bagiński;0.0;MA;J;;;
 14300;Krzysztof;Cyranik;2.5;LB;S;;;
-14301;Marian;Grzesiak;4.0;LB;N;"Instalko SBS 3 Międzyrzecz";T;T
+14301;Marian;Grzesiak;4.0;LB;N;;;
 14302;Edward;Michalak;2.5;OP;S;"MICHALAK Kolonowskie";T;T
 14303;Krzysztof;Krasuski;0.0;LD;S;;;
 14304;Izabela;Trzaska;0.0;MA;KS;;;
@@ -12625,7 +12624,7 @@ PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 15427;Artur;Wyciślok;0.0;SL;J;;;
 15428;Karol;Sznapka;0.0;SL;J;;;
 15429;Szymon;Zmilczak;0.0;SL;J;;;
-15430;Jarosław;Szymla;1.0;MP;J;;T;T
+15430;Jarosław;Szymla;1.0;SL;J;;;
 15431;Adam;Schimke;0.0;SL;J;;;
 15432;Michał;Kołodziej;0.0;LU;J;;;
 15433;Tomasz;Kurlej;0.5;DS;J;;;
@@ -14794,7 +14793,7 @@ PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 17629;Jan;Kuliński;0.0;SW;N;;;
 17630;Małgorzata;Rojek;0.0;MA;KJ;;;
 17631;Iwona;Kotlarska;0.0;MA;KJ;;;
-17632;Agnieszka;Cieślik;0.0;MA;KJ;"Singleton Warszawa";T;T
+17632;Agnieszka;Cieślik;0.0;MA;KJ;;;
 17633;Jadwiga;Czyżewska;0.0;MA;KJ;;;
 17634;Marek;Kiełpiński;0.0;KP;;;;
 17635;Maria;Hetmańska;0.0;MA;KJ;;;
@@ -15892,9 +15891,3 @@ PID;IMIE;NAZWISKO;WK;OKREG;INFO;KLUB;ZNIZKA;SKLADKA2017
 18733;Maciej;Mączewski;0.0;PD;M;;T;T
 18734;Nikodem;Major;0.0;PD;M;;T;T
 18735;Antoni;Pękała;0.0;PD;M;;T;T
-18736;Albert;Strebejko;0.0;PM;J;;;
-18737;Krzysztof;Tabeau;0.0;PM;J;;;
-18738;Paweł;Morgen;0.0;MA;J;"Singleton Warszawa";T;T
-18739;Maciej;Podgórski;0.0;MA;J;"Singleton Warszawa";T;T
-18740;Dominik;Manowski;0.0;SL;N;"UTW Katowice";T;T
-18741;Andrzej;Zagała;0.0;SL;S;"UTW Katowice";;
