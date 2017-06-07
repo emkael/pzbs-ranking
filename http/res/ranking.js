@@ -60,9 +60,11 @@ var ranking = {
     },
 
     constructHash : function(params) {
-        return Array.from(params).map(function(param) {
-            return param[0] + ':' + param[1].join(',');
-        }).join(';');
+        var paramArray = [];
+        params.forEach(function(value, key) {
+            paramArray.push(key + ':' + value.join(','));
+        });
+        return paramArray.join(';');
     },
 
     savedParams : new Map(),
