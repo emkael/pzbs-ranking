@@ -14,5 +14,7 @@ find $DIR -maxdepth 1 -type f -name \*.html |
     while read FILE
     do
         python editions.py $FILE
+        htmlmin $FILE $FILE.tmp
+        mv $FILE.tmp $FILE
     done
 python players.py $DIR/players
