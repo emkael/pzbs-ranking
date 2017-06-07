@@ -175,7 +175,7 @@ var ranking = {
             $(window).on('hashchange', ranking.readHash).trigger('hashchange');
         });
 
-        $('button[data-filter]').click(function() {
+        $('button[data-filter]').click(function(ev) {
             $('table.table').css('opacity', 0.1);
             var button = $(this);
             var params = ranking.parseHash(location.hash);
@@ -185,7 +185,7 @@ var ranking = {
             if (index > -1) {
                 param = param.filter(function(v) { return v != value; });
             } else {
-                if (!param) {
+                if (!param || !ev.ctrlKey) {
                     param = [];
                 }
                 param.push(value);
