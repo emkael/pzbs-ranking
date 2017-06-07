@@ -20,6 +20,8 @@
       <div class="panel panel-default filters">
         <div class="panel-heading" role="button" data-toggle="collapse" data-target="#filters" aria-expanded="false" aria-controls="filters">
           Filtry rankingu
+          <span class="glyphicon glyphicon-question-sign auto-tooltip"
+                title="Kliknięcie zamienia filtr w danej kategorii.<br />Kliknięcie z klawiszem Ctrl dodaje filtr w kategorii."></span>
         </div>
         <div class="collapse panel-body" id="filters">
           <p>
@@ -82,7 +84,11 @@
             <tr class="text-center">
               <th colspan="2">Miejsce</th>
               <th class="pid" colspan="2">PID</th>
-              <th>Zawodnik</th>
+              <th>
+                Zawodnik
+                <span class="glyphicons glyphicons-question-sign auto-tooltip"
+                      title="Kliknięcie w wiersz wyświetla historię zawodnika"></span>
+              </th>
               <th class="club">Klub</th>
               <th class="region" colspan="3">Okręg</th>
               <th class="gender" colspan="3">Płeć</th>
@@ -128,7 +134,7 @@
                 <span class="change label"></span>
               </td>
               <td class="ranking text-right">
-                <span class="score-tip"></span>
+                <span class="auto-tooltip"></span>
               </td>
             </tr>
           </tbody>
