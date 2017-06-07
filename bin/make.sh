@@ -1,2 +1,2 @@
 #!/bin/bash
-bin/build.sh prod-dates.json http
+bin/build.sh config/dates.json http

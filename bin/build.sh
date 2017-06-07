@@ -1,10 +1,8 @@
 #!/bin/bash
 CONFIG=$1
 DIR=$2
-rm config/dates.json
-ln -s $CONFIG config/dates.json
 PREV_DATE=""
-cat config/dates.json |
+cat $CONFIG |
     jq '.[] | .date, .url, .index, .name' |
     xargs -n4 |
     while read DATE URL INDEX NAME
