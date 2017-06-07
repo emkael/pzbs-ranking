@@ -98,7 +98,8 @@ var ranking = {
             ranking.filterRows(params);
             ranking.savedParams = params;
         }
-        $('table.table').css('opacity', 1);
+        $('table.table, .filters .panel-body').css('opacity', 1);
+        ranking.filtersDisabled = false;
         var pagesize = 40;
         var page = params.get('page') || [0];
         var count = $('table.table-paginate').paginate(pagesize, parseInt(page[0]));
@@ -108,6 +109,8 @@ var ranking = {
         ranking.buildPaginator('#top-paginator', count, pagesize, page[0] || 1);
         ranking.buildPaginator('#bottom-paginator', count, pagesize, page[0] || 1);
     },
+
+    filtersDisabled: false,
 
     filterRows : function(params) {
         $('table.table tbody tr').show().removeClass('gold silver bronze').each(function() {
@@ -176,36 +179,42 @@ var ranking = {
         });
 
         $('button[data-filter]').click(function(ev) {
-            $('table.table').css('opacity', 0.1);
-            var button = $(this);
-            var params = ranking.parseHash(location.hash);
-            var param = params.get(button.attr('data-filter'));
-            var value = button.attr('data-value');
-            var index = param ? param.indexOf(value) : -1;
-            if (index > -1) {
-                param = param.filter(function(v) { return v != value; });
-            } else {
-                if (!param || !ev.ctrlKey) {
-                    param = [];
+            if (!ranking.filtersDisabled) {
+                ranking.filtersDisabled = true;
+                $('table.table, .filters .panel-body').css('opacity', 0.1);
+                var button = $(this);
+                var params = ranking.parseHash(location.hash);
+                var param = params.get(button.attr('data-filter'));
+                var value = button.attr('data-value');
+                var index = param ? param.indexOf(value) : -1;
+                if (index > -1) {
+                    param = param.filter(function(v) { return v != value; });
+                } else {
+                    if (!param || !ev.ctrlKey) {
+                        param = [];
+                    }
+                    param.push(value);
                 }
-                param.push(value);
+                if (!param.length) {
+                    params.delete(button.attr('data-filter'));
+                } else {
+                    params.set(button.attr('data-filter'), param);
+                }
+                params.delete('page');
+                location.hash = ranking.constructHash(params);
             }
-            if (!param.length) {
-                params.delete(button.attr('data-filter'));
-            } else {
-                params.set(button.attr('data-filter'), param);
-            }
-            params.delete('page');
-            location.hash = ranking.constructHash(params);
         });
 
         $('button[data-clear]').click(function() {
-            $('table.table').css('opacity', 0.1);
-            var button = $(this);
-            var params = ranking.parseHash(location.hash);
-            params.delete(button.attr('data-clear'));
-            params.delete('page');
-            location.hash = ranking.constructHash(params);
+            if (!ranking.filtersDisabled) {
+                ranking.filtersDisabled = true;
+                $('table.table, .filters .panel-body').css('opacity', 0.1);
+                var button = $(this);
+                var params = ranking.parseHash(location.hash);
+                params.delete(button.attr('data-clear'));
+                params.delete('page');
+                location.hash = ranking.constructHash(params);
+            }
         });
 
         $(document).on('click', 'button.paginator-prev, button.paginator-next, button.paginator-page', ranking.changePage);
