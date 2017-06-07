@@ -35,7 +35,7 @@ CREATE TABLE `rankings` (
   `pid` int(11) NOT NULL,
   `date` date NOT NULL,
   `place` int(11) NOT NULL,
-  `score` decimal(6,2) NOT NULL,
+  `score` decimal(8,4) NOT NULL,
   `region` varchar(2) COLLATE utf8_unicode_520_ci NOT NULL,
   `flags` varchar(2) COLLATE utf8_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
@@ -53,7 +53,7 @@ CREATE TABLE `temp_rankings` (
   `pid` int(11) NOT NULL,
   `date` date NOT NULL,
   `place` int(11) NOT NULL,
-  `score` decimal(6,2) NOT NULL
+  `score` decimal(8,4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
 
 --

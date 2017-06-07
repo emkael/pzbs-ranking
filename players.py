@@ -61,7 +61,9 @@ for pid, player in players.iteritems():
         rank_link.string = '.'.join(date.split('-')[::-1])
         rank_link['href'] = '../%s' % (dates[date])
         if ranking is not None:
-            row.select('.score')[0].string = str(ranking['score'])
+            score_cell = row.select('.score span')[0]
+            score_cell.string = '%.2f' % (ranking['score'])
+            score_cell['title'] = str(ranking['score'])
             for field in ['region', 'age', 'gender']:
                 link = row.select('td.'+field+' a')[0]
                 link['href'] = rank_link['href'] + '#%s:%s' % (

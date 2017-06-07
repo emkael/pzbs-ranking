@@ -45,7 +45,9 @@ for row in ranking:
         badge = new_row.select('td.' + category + '-place .change')[0]
         badge.string = row[category + '-change']
         badge['class'] = badge['class'] + ['label-' + row[category + '-change-class']]
-    new_row.select('td.ranking')[0].string = str(row['score'])
+    score_cell = new_row.select('td.ranking span')[0]
+    score_cell['title'] = str(row['score'])
+    score_cell.string = '%.2f' % (row['score'])
     new_row.select('td.place .rank')[0].string = str(row['place'])
     badge = new_row.select('td.place .change')[0]
     badge.string = row['place-change']
