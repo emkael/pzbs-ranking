@@ -98,14 +98,14 @@ var ranking = {
             ranking.filterRows(params);
             ranking.savedParams = params;
         }
-        $('table.table, .filters .panel-body').css('opacity', 1);
+        $('table.data-table, .filters .panel-body').css('opacity', 1);
         ranking.filtersDisabled = false;
         var pagesize = 40;
         var page = params.get('page') || [0];
         var count = $('table.table-paginate').paginate(pagesize, parseInt(page[0]));
-        $('table.table tbody tr[data-paginate-visible=1]').eq(0).addClass('gold');
-        $('table.table tbody tr[data-paginate-visible=1]').eq(1).addClass('silver');
-        $('table.table tbody tr[data-paginate-visible=1]').eq(2).addClass('bronze');
+        $('table.data-table tbody tr[data-paginate-visible=1]').eq(0).addClass('gold');
+        $('table.data-table tbody tr[data-paginate-visible=1]').eq(1).addClass('silver');
+        $('table.data-table tbody tr[data-paginate-visible=1]').eq(2).addClass('bronze');
         ranking.buildPaginator('#top-paginator', count, pagesize, page[0] || 1);
         ranking.buildPaginator('#bottom-paginator', count, pagesize, page[0] || 1);
     },
@@ -113,7 +113,7 @@ var ranking = {
     filtersDisabled: false,
 
     filterRows : function(params) {
-        $('table.table tbody tr').show().removeClass('gold silver bronze').each(function() {
+        $('table.data-table tbody tr').show().removeClass('gold silver bronze').each(function() {
             var row = $(this);
             var hidden = false;
             params.forEach(function(value, param) {
@@ -149,7 +149,7 @@ var ranking = {
     },
 
     changePage: function() {
-        $('table.table').css('opacity', 0.1);
+        $('table.data-table').css('opacity', 0.1);
         var btn = $(this);
         var page = parseInt(btn.attr('data-page'));
         var params = ranking.parseHash(location.hash);
@@ -166,7 +166,7 @@ var ranking = {
             params.set('page', [page]);
             location.hash = ranking.constructHash(params);
         } else {
-            $('table.table').css('opacity', 1);
+            $('table.data-table').css('opacity', 1);
         }
     },
 
@@ -181,7 +181,7 @@ var ranking = {
         $('button[data-filter]').click(function(ev) {
             if (!ranking.filtersDisabled) {
                 ranking.filtersDisabled = true;
-                $('table.table, .filters .panel-body').css('opacity', 0.1);
+                $('table.data-table, .filters .panel-body').css('opacity', 0.1);
                 var button = $(this);
                 var params = ranking.parseHash(location.hash);
                 var param = params.get(button.attr('data-filter'));
@@ -208,7 +208,7 @@ var ranking = {
         $('button[data-clear]').click(function() {
             if (!ranking.filtersDisabled) {
                 ranking.filtersDisabled = true;
-                $('table.table, .filters .panel-body').css('opacity', 0.1);
+                $('table.data-table, .filters .panel-body').css('opacity', 0.1);
                 var button = $(this);
                 var params = ranking.parseHash(location.hash);
                 params.delete(button.attr('data-clear'));

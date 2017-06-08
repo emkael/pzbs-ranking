@@ -1,6 +1,6 @@
-.table > tbody > tr.gold > td { background-color: #FFEF96 }
-.table > tbody > tr.silver > td { background-color: #E5E5E5 }
-.table > tbody > tr.bronze > td { background-color: #CAA077 }
+.table-hover > tbody > tr.gold > td { background-color: #FFEF96 }
+.table-hover > tbody > tr.silver > td { background-color: #E5E5E5 }
+.table-hover > tbody > tr.bronze > td { background-color: #CAA077 }
 .table-hover > tbody > tr.gold:hover > td { background-color: #FFE34C }
 .table-hover > tbody > tr.silver:hover > td { background-color: #CDCDCD }
 .table-hover > tbody > tr.bronze:hover > td { background-color: #B88048 }

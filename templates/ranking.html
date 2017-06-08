@@ -76,10 +76,65 @@
           </div>
         </div>
       </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="button" data-toggle="collapse" data-target="#captions" aria-expanded="false" aria-controls="captions">
+          Legenda
+        </div>
+        <div class="collapse panel-body" id="captions">
+          <div class="row">
+            <div class="col-md-6">
+              Oznaczenia wierszy tabeli (kolor tła):
+              <table class="table history table-hover">
+                <tbody>
+                  <tr class="gold">
+                    <td>Pierwsze miejsce (w ramach wybranych kryteriów)</td>
+                  </tr>
+                  <tr class="silver">
+                    <td>Drugie miejsce (w ramach wybranych kryteriów)</td>
+                  </tr>
+                  <tr class="bronze">
+                    <td>Trzecie miejsce (w ramach wybranych kryteriów)</td>
+                  </tr>
+                  <tr class="info">
+                    <td>Pierwsze miejsce w którejś z kategorii (okręg, płeć, wiek)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-6">
+              Oznaczenia zmiany miejsca w rankingu:
+              <table class="table history">
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="change label label-success">+1</span> awans
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="change label label-default">=</span> bez zmian
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="change label label-danger">-1</span> spadek
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="change label label-info">N</span> nienotowany w poprzednim rankingu
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="top-paginator" class="text-center"></div>
       <br />
       <div class="table-responsive">
-        <table class="table table-striped table-hover table-condened table-paginate">
+        <table class="data-table table table-striped table-hover table-paginate">
           <thead>
             <tr class="text-center">
               <th colspan="2">Miejsce</th>

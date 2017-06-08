@@ -28,7 +28,7 @@ for row in ranking:
                     row[category + '-change-class'] = 'default'
 
 table = bs4(file('templates/ranking.html'), 'lxml')
-table_body = table.select('tbody')[0]
+table_body = table.select('table.data-table tbody')[0]
 table_row = table_body.select('tr')[0].extract()
 
 table.select('.page-header h2 small')[0].string = subtitle
