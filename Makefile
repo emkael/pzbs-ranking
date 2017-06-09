@@ -22,3 +22,6 @@ $(tmpfiles):
 
 players:
 	bin/build-players.sh http
+
+deploy:
+	sshpass -p `cat config/deploy-pass` rsync -urpP http/ `cat config/deploy-path`

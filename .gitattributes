@@ -1,1 +1,2 @@
 config/*db.json filter=git-crypt diff=git-crypt
+config/deploy-* filter=git-crypt diff=git-crypt
