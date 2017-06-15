@@ -1,26 +1,27 @@
-tmpfiles := $(patsubst %.html,%.html.tmp,$(wildcard http/*.html))
-rankfiles := $(patsubst %.html,%.html.ed,$(wildcard http/*.html))
-
-$(tmpfiles):
-	python -m htmlmin.command $(patsubst %.tmp,%,$@) $@
-	mv $@ $(patsubst %.tmp,%,$@)
-
-$(rankfiles):
-	python editions.py $(patsubst %.ed,%,$@)
-
 all: rankings players
 
-minimize: $(tmpfiles)
-
-deploy:
-	bin/deploy.sh
+targetfiles := $(shell bin/target-ranking-files.sh config/dates.json)
+tmpfiles := $(patsubst %.html,http/%.html.tmp,$(targetfiles))
+rankfiles := $(patsubst %.html,http/%.html.ed,$(targetfiles))
 
 rankings: tables editions
 
 tables:
 	bin/build-rankings.sh config/dates.json http
 
-editions: $(rankfiles)
+editions: tables $(rankfiles)
+
+$(rankfiles):
+	python editions.py $(patsubst %.ed,%,$@)
 
 players:
 	bin/build-players.sh http
+
+minimize: $(tmpfiles)
+
+$(tmpfiles):
+	python -m htmlmin.command $(patsubst %.tmp,%,$@) $@
+	mv $@ $(patsubst %.tmp,%,$@)
+
+deploy:
+	bin/deploy.sh
