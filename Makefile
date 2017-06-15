@@ -13,7 +13,7 @@ all: rankings players
 minimize: $(tmpfiles)
 
 deploy:
-	sshpass -p `cat config/deploy-pass` rsync -urpP http/ `cat config/deploy-path`
+	bin/deploy.sh
 
 rankings: tables editions
 
