@@ -2,7 +2,7 @@ tmpfiles := $(patsubst %.html,%.html.tmp,$(wildcard http/*.html))
 rankfiles := $(patsubst %.html,%.html.ed,$(wildcard http/*.html))
 
 $(tmpfiles):
-	htmlmin $(patsubst %.tmp,%,$@) $@
+	python -m htmlmin.command $(patsubst %.tmp,%,$@) $@
 	mv $@ $(patsubst %.tmp,%,$@)
 
 $(rankfiles):
