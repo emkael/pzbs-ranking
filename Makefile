@@ -25,3 +25,6 @@ $(tmpfiles):
 
 deploy:
 	bin/deploy.sh
+
+clean:
+	find http -type f -name \*.html -delete
