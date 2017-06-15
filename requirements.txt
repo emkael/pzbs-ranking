@@ -1,0 +1,4 @@
+bs4
+htmlmin
+lxml
+mysql-connector==2.1.4
