@@ -1,5 +1,6 @@
 import copy, json, os, sys
 from bs4 import BeautifulSoup as bs4
+from math import ceil
 from pyranking.fetch import fetch_ranking
 
 output_directory = sys.argv[1]
@@ -59,16 +60,27 @@ for pid, player in players.iteritems():
         row = copy.copy(missing_row) if ranking is None else copy.copy(normal_row)
         rank_link = row.find('td').a
         rank_link.string = '.'.join(date.split('-')[::-1])
-        rank_link['href'] = '../%s' % (dates[date])
+        base_rank_link = '../%s' % (dates[date])
+        if ranking is not None and ranking['place'] > 40:
+            rank_link['href'] = '../%s#page:%d' % (
+                dates[date], ceil(ranking['place'] / 40.0)
+            )
+        else:
+            rank_link['href'] = base_rank_link
         if ranking is not None:
             score_cell = row.select('.score span')[0]
             score_cell.string = '%.2f' % (ranking['score'])
             score_cell['title'] = str(ranking['score'])
             for field in ['region', 'age', 'gender']:
                 link = row.select('td.'+field+' a')[0]
-                link['href'] = rank_link['href'] + '#%s:%s' % (
-                    field, ranking[field]
-                )
+                if ranking[field+'-place'] > 40:
+                    link['href'] = base_rank_link + '#%s:%s;page:%d' % (
+                        field, ranking[field], ceil(ranking[field+'-place'] / 40.0)
+                    )
+                else:
+                    link['href'] = base_rank_link + '#%s:%s' % (
+                        field, ranking[field]
+                    )
                 link.string = ranking[field] if len(ranking[field]) else '-'
             for field in ['', 'region-', 'age-', 'gender-']:
                 row.select('td.'+field+'place')[0].string = '%d.' % (ranking[field+'place'])
