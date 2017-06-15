@@ -57,4 +57,7 @@ for row in ranking:
             new_row['class'] = new_row.get('class', []) + ['info']
     table_body.append(new_row)
 
+rawlink = table.select('a#rawlink')[0]
+rawlink['href'] = '%s/%s.csv' % (rawlink['href'], ranking_date)
+
 print table.prettify().encode('utf-8')
