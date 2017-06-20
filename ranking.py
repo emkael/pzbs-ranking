@@ -1,4 +1,4 @@
-import copy, sys
+import copy, os, sys
 from bs4 import BeautifulSoup as bs4
 
 from pyranking.fetch import fetch_ranking
@@ -56,6 +56,9 @@ for row in ranking:
         if row[category + '-place'] == 1:
             new_row['class'] = new_row.get('class', []) + ['info']
     table_body.append(new_row)
+
+script_src = table.select('script[src="res/ranking.js"]')[0]
+script_src['src'] = '%s?%d' % ('res/ranking.js', os.path.getmtime('http/res/ranking.js'))
 
 rawlink = table.select('a#rawlink')[0]
 rawlink['href'] = '%s/%s.csv' % (rawlink['href'], ranking_date)
