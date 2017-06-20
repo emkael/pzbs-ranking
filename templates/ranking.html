@@ -149,7 +149,22 @@
           </div>
         </div>
       </div>
-      <div id="top-paginator" class="text-center"></div>
+      <div class="form-inline text-center">
+        <div class="input-group" id="top-paginator"></div>
+        <div class="input-group" role="group">
+          <div class="input-group-addon">Na stronę:</div>
+          <div class="input-group">
+            <select id="pagesize" class="form-control">
+              <option value="50" selected="selected">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="500">500</option>
+              <option value="1000">1000</option>
+            </select>
+          </div>
+          <span class="input-group-addon">razem: <span id="paginate-count">1000</span></span>
+        </div>
+      </div>
       <br />
       <div class="table-responsive">
         <table class="data-table table table-striped table-hover table-paginate">
