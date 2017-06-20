@@ -194,9 +194,12 @@ var ranking = {
         $('.container .table tbody tr').click(ranking.playerClick);
 
         $(document).ready(function() {
-            $(window).on('hashchange', ranking.readHash).trigger('hashchange');
+            $(window).on('hashchange', function() {
+                ranking.filtersDisabled = true;
+                $('table.data-table, .filters .panel-body').css('opacity', 0.1);
+                ranking.readHash();
+            }).trigger('hashchange');
         });
-
 
         var handleParams = function(callback, target, ev) {
             if (!ranking.filtersDisabled) {
