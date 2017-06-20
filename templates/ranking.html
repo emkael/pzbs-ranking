@@ -25,40 +25,46 @@
         </div>
         <div class="collapse panel-body" id="filters">
           <div class="form-inline">
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-disabled">Okręg</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="DS">DS</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="KP">KP</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="LB">LB</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="LD">LD</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="LU">LU</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="MA">MA</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="MP">MP</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="OP">OP</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="PD">PD</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="PK">PK</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="PM">PM</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="SL">SL</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="SW">SW</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="WM">WM</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="WP">WP</button>
-              <button type="button" class="btn btn-default" data-filter="region" data-value="ZP">ZP</button>
-              <button type="button" class="btn btn-default" data-clear="region">wszystkie</button>
+            <div class="input-group" role="group">
+              <div class="input-group-addon">Okręg</div>
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default" data-filter="region" data-value="DS">DS</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="KP">KP</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="LB">LB</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="LD">LD</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="LU">LU</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="MA">MA</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="MP">MP</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="OP">OP</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="PD">PD</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="PK">PK</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="PM">PM</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="SL">SL</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="SW">SW</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="WM">WM</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="WP">WP</button>
+                <button type="button" class="btn btn-default" data-filter="region" data-value="ZP">ZP</button>
+                <button type="button" class="btn btn-default" data-clear="region">wszystkie</button>
+              </div>
             </div>
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-disabled">Płeć</button>
-              <button type="button" class="btn btn-default" data-filter="gender" data-value="K">K</button>
-              <button type="button" class="btn btn-default" data-filter="gender" data-value="M">M</button>
-              <button type="button" class="btn btn-default" data-clear="gender">obie</button>
+            <div class="input-group" role="group">
+              <div class="input-group-addon">Kat. wiekowa</div>
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default" data-filter="age" data-value="M">M</button>
+                <button type="button" class="btn btn-default" data-filter="age" data-value="J">J</button>
+                <button type="button" class="btn btn-default" data-filter="age" data-value="">-</button>
+                <button type="button" class="btn btn-default" data-filter="age" data-value="S">S</button>
+                <button type="button" class="btn btn-default" data-filter="age" data-value="N">N</button>
+                <button type="button" class="btn btn-default" data-clear="age">wszyscy</button>
+              </div>
             </div>
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-disabled">Kat. wiekowa</button>
-              <button type="button" class="btn btn-default" data-filter="age" data-value="M">M</button>
-              <button type="button" class="btn btn-default" data-filter="age" data-value="J">J</button>
-              <button type="button" class="btn btn-default" data-filter="age" data-value="">-</button>
-              <button type="button" class="btn btn-default" data-filter="age" data-value="S">S</button>
-              <button type="button" class="btn btn-default" data-filter="age" data-value="N">N</button>
-              <button type="button" class="btn btn-default" data-clear="age">wszyscy</button>
+            <div class="input-group" role="group">
+              <div class="input-group-addon">Płeć</div>
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default" data-filter="gender" data-value="K">K</button>
+                <button type="button" class="btn btn-default" data-filter="gender" data-value="M">M</button>
+                <button type="button" class="btn btn-default" data-clear="gender">obie</button>
+              </div>
             </div>
             <div class="form-group">
               <form action="javascript:void(0)">
