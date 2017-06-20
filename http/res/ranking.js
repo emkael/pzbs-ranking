@@ -195,25 +195,40 @@ var ranking = {
             $(window).on('hashchange', ranking.readHash).trigger('hashchange');
         });
 
-        $('button[data-filter-action]').click(function(ev) {
+
+        var handleParams = function(callback, target, ev) {
             if (!ranking.filtersDisabled) {
                 ranking.filtersDisabled = true;
                 $('table.data-table, .filters .panel-body').css('opacity', 0.1);
-                var button = $(this);
+                var oldHash = location.hash.replace(/^#/, '');
+                var newParams = callback(target, ev);
+                var newHash = ranking.constructHash(newParams);
+                if (oldHash != newHash) {
+                    location.hash = newHash;
+                } else {
+                    $('table.data-table, .filters .panel-body').css('opacity', 1);
+                    ranking.filtersDisabled = false;
+                }
+            }
+        };
+
+        $('button[data-filter-action]').click(function(ev) {
+            handleParams(function(target, ev) {
+                var button = target;
                 var params = ranking.parseHash(location.hash);
                 var param = params.get(button.attr('data-filter-action'));
                 var value = $('input[data-filter-field="' + button.attr('data-filter-action') + '"]').val().trim().toLowerCase();
-                params.set(button.attr('data-filter-action'), [value]);
-                params.delete('page');
-                location.hash = ranking.constructHash(params);
-            }
+                if (value.length > 0) {
+                    params.set(button.attr('data-filter-action'), [value]);
+                    params.delete('page');
+                }
+                return params;
+            }, $(this), ev);
         });
 
         $('button[data-filter]').click(function(ev) {
-            if (!ranking.filtersDisabled) {
-                ranking.filtersDisabled = true;
-                $('table.data-table, .filters .panel-body').css('opacity', 0.1);
-                var button = $(this);
+            handleParams(function(target, ev) {
+                var button = target;
                 var params = ranking.parseHash(location.hash);
                 var param = params.get(button.attr('data-filter'));
                 var value = button.attr('data-value');
@@ -232,20 +247,18 @@ var ranking = {
                     params.set(button.attr('data-filter'), param);
                 }
                 params.delete('page');
-                location.hash = ranking.constructHash(params);
-            }
+                return params;
+            }, $(this), ev);
         });
 
         $('button[data-clear]').click(function() {
-            if (!ranking.filtersDisabled) {
-                ranking.filtersDisabled = true;
-                $('table.data-table, .filters .panel-body').css('opacity', 0.1);
-                var button = $(this);
+            handleParams(function(target, ev) {
+                var button = target;
                 var params = ranking.parseHash(location.hash);
                 params.delete(button.attr('data-clear'));
                 params.delete('page');
-                location.hash = ranking.constructHash(params);
-            }
+                return params;
+            }, $(this));
         });
 
         $(document).on('click', 'button.paginator-prev, button.paginator-next, button.paginator-page', ranking.changePage);
