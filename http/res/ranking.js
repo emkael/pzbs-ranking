@@ -71,7 +71,7 @@ var ranking = {
 
     readHash : function() {
         var params = ranking.parseHash(location.hash);
-        var allParams = ['age', 'gender', 'region'];
+        var allParams = ['age', 'gender', 'region', 'name'];
         var paramsChanged = false;
         allParams.forEach(function(param) {
             var newParam = params.get(param) || [];
@@ -86,13 +86,25 @@ var ranking = {
                 $('button[data-filter="' + param + '"][data-value="' + value + '"]').addClass('btn-primary');
             });
         });
+        var filtersPresent = false;
         allParams.forEach(function(param) {
-            if ($('button[data-filter="' + param + '"].btn-primary').size() == 0) {
+            if ($('button[data-filter="' + param + '"]').size() > 0
+                && $('button[data-filter="' + param + '"].btn-primary').size() == 0) {
                 $('button[data-clear="' + param + '"]').addClass('btn-primary');
             } else {
-                $('#filters').collapse();
+                filtersPresent |= ($('button[data-filter="' + param + '"]').size() > 0);
+            }
+            var field = $('input[data-filter-field="' + param + '"]');
+            if (field.size() > 0) {
+                field.val(params.get(param));
+                if (field.val().length > 0) {
+                    filtersPresent = true;
+                }
             }
         });
+        if (filtersPresent) {
+            $('#filters').collapse();
+        }
         if (paramsChanged) {
             $('table.table-paginate').paginate('clear');
             ranking.filterRows(params);
@@ -117,7 +129,12 @@ var ranking = {
             var row = $(this);
             var hidden = false;
             params.forEach(function(value, param) {
-                if (param != 'page') {
+                if (param == 'name') {
+                    if (row.find('td.' + param).text().trim().toLowerCase().search(value.join('')) == -1) {
+                        row.hide();
+                        hidden = true;
+                    }
+                } else if (param != 'page') {
                     if (value.indexOf(row.find('td.' + param).text().trim()) == -1) {
                         row.hide();
                         hidden = true;
@@ -178,11 +195,40 @@ var ranking = {
             $(window).on('hashchange', ranking.readHash).trigger('hashchange');
         });
 
-        $('button[data-filter]').click(function(ev) {
+
+        var handleParams = function(callback, target, ev) {
             if (!ranking.filtersDisabled) {
                 ranking.filtersDisabled = true;
                 $('table.data-table, .filters .panel-body').css('opacity', 0.1);
-                var button = $(this);
+                var oldHash = location.hash.replace(/^#/, '');
+                var newParams = callback(target, ev);
+                var newHash = ranking.constructHash(newParams);
+                if (oldHash != newHash) {
+                    location.hash = newHash;
+                } else {
+                    $('table.data-table, .filters .panel-body').css('opacity', 1);
+                    ranking.filtersDisabled = false;
+                }
+            }
+        };
+
+        $('button[data-filter-action]').click(function(ev) {
+            handleParams(function(target, ev) {
+                var button = target;
+                var params = ranking.parseHash(location.hash);
+                var param = params.get(button.attr('data-filter-action'));
+                var value = $('input[data-filter-field="' + button.attr('data-filter-action') + '"]').val().trim().toLowerCase();
+                if (value.length > 0) {
+                    params.set(button.attr('data-filter-action'), [value]);
+                    params.delete('page');
+                }
+                return params;
+            }, $(this), ev);
+        });
+
+        $('button[data-filter]').click(function(ev) {
+            handleParams(function(target, ev) {
+                var button = target;
                 var params = ranking.parseHash(location.hash);
                 var param = params.get(button.attr('data-filter'));
                 var value = button.attr('data-value');
@@ -201,20 +247,18 @@ var ranking = {
                     params.set(button.attr('data-filter'), param);
                 }
                 params.delete('page');
-                location.hash = ranking.constructHash(params);
-            }
+                return params;
+            }, $(this), ev);
         });
 
         $('button[data-clear]').click(function() {
-            if (!ranking.filtersDisabled) {
-                ranking.filtersDisabled = true;
-                $('table.data-table, .filters .panel-body').css('opacity', 0.1);
-                var button = $(this);
+            handleParams(function(target, ev) {
+                var button = target;
                 var params = ranking.parseHash(location.hash);
                 params.delete(button.attr('data-clear'));
                 params.delete('page');
-                location.hash = ranking.constructHash(params);
-            }
+                return params;
+            }, $(this));
         });
 
         $(document).on('click', 'button.paginator-prev, button.paginator-next, button.paginator-page', ranking.changePage);
