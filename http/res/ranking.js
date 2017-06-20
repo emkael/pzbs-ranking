@@ -69,16 +69,18 @@ var ranking = {
 
     savedParams : new Map(),
 
+    paramChanged: function(params, param) {
+        var newParam = params.get(param) || [];
+        var oldParam = ranking.savedParams.get(param) || [];
+        return (newParam.length != oldParam.length) || (newParam.join(',') != oldParam.join(','));
+    },
+
     readHash : function() {
         var params = ranking.parseHash(location.hash);
         var allParams = ['age', 'gender', 'region', 'name'];
         var paramsChanged = false;
         allParams.forEach(function(param) {
-            var newParam = params.get(param) || [];
-            var oldParam = ranking.savedParams.get(param) || [];
-            if (newParam.length != oldParam.length || newParam.join(',') != oldParam.join(',')) {
-                paramsChanged = true;
-            }
+            paramsChanged |= ranking.paramChanged(params, param);
         });
         $('button.btn-primary').removeClass('btn-primary');
         params.forEach(function(values, param) {
