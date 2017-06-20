@@ -24,7 +24,7 @@
                 title="Kliknięcie zamienia filtr w danej kategorii.<br />Kliknięcie z klawiszem Ctrl dodaje filtr w kategorii."></span>
         </div>
         <div class="collapse panel-body" id="filters">
-          <p>
+          <div class="form-inline">
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-disabled">Okręg</button>
               <button type="button" class="btn btn-default" data-filter="region" data-value="DS">DS</button>
@@ -45,8 +45,6 @@
               <button type="button" class="btn btn-default" data-filter="region" data-value="ZP">ZP</button>
               <button type="button" class="btn btn-default" data-clear="region">wszystkie</button>
             </div>
-          </p>
-          <p>
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-disabled">Płeć</button>
               <button type="button" class="btn btn-default" data-filter="gender" data-value="K">K</button>
@@ -62,7 +60,19 @@
               <button type="button" class="btn btn-default" data-filter="age" data-value="N">N</button>
               <button type="button" class="btn btn-default" data-clear="age">wszyscy</button>
             </div>
-          </p>
+            <div class="form-group">
+              <div class="input-group" role="group">
+                <div class="input-group-addon">Imię/nazwisko</div>
+                <input type="text" class="form-control" data-filter-field="name" />
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default" data-filter-action="name">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                  <button type="button" class="btn btn-default" data-clear="name">wyczyść</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="panel panel-default">

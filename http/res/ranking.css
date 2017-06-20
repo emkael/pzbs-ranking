@@ -1,3 +1,4 @@
+#filters div[role="group"] { margin: 10px; }
 .table-hover > tbody > tr.gold > td { background-color: #FFEF96 }
 .table-hover > tbody > tr.silver > td { background-color: #E5E5E5 }
 .table-hover > tbody > tr.bronze > td { background-color: #E1CAB4 }
