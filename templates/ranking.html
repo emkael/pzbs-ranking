@@ -21,7 +21,8 @@
         <div class="panel-heading" role="button" data-toggle="collapse" data-target="#filters" aria-expanded="false" aria-controls="filters">
           Filtry rankingu
           <span class="glyphicon glyphicon-question-sign auto-tooltip"
-                title="Kliknięcie zamienia filtr w danej kategorii.<br />Kliknięcie z klawiszem Ctrl dodaje filtr w kategorii."></span>
+                title="Kliknięcie zamienia filtr w danej kategorii.<br />Kliknięcie z klawiszem Ctrl dodaje filtr w kategorii."
+                aria-role="tooltip"></span>
         </div>
         <div class="collapse panel-body" id="filters">
           <div class="form-inline">
@@ -72,7 +73,8 @@
                   <div class="input-group-addon">Imię/nazwisko</div>
                   <input type="text" class="form-control" data-filter-field="name" />
                   <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default" data-filter-action="name">
+                    <button type="submit" class="btn btn-default" data-filter-action="name"
+                            aria-label="Filtruj po imieniu/nazwisku">
                       <i class="glyphicon glyphicon-search"></i>
                     </button>
                     <button type="button" class="btn btn-default" data-clear="name">wyczyść</button>
@@ -155,7 +157,8 @@
           <div class="input-group pull-right" role="group">
             <div class="input-group-addon">Na stronę:</div>
             <div class="input-group">
-              <select id="pagesize" class="form-control">
+              <select id="pagesize" class="form-control"
+                      aria-label="Pozycji na stronę">
                 <option value="50" selected="selected">50</option>
                 <option value="100">100</option>
                 <option value="200">200</option>
@@ -178,7 +181,8 @@
                 <th>
                   Zawodnik
                   <span class="glyphicon glyphicon-question-sign auto-tooltip"
-                        title="Kliknięcie w wiersz wyświetla historię zawodnika"></span>
+                        title="Kliknięcie w wiersz wyświetla historię zawodnika"
+                        aria-role="tooltip"></span>
                 </th>
                 <th class="club">Klub</th>
                 <th class="region" colspan="3">Okręg</th>
