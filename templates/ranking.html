@@ -149,86 +149,92 @@
           </div>
         </div>
       </div>
-      <div class="form-inline text-center">
-        <div class="input-group" id="top-paginator"></div>
-        <div class="input-group" role="group">
-          <div class="input-group-addon">Na stronę:</div>
-          <div class="input-group">
-            <select id="pagesize" class="form-control">
-              <option value="50" selected="selected">50</option>
-              <option value="100">100</option>
-              <option value="200">200</option>
-              <option value="500">500</option>
-              <option value="1000">1000</option>
-            </select>
+      <div class="panel">
+        <div class="form-inline">
+          <div class="input-group pull-left" id="top-paginator"></div>
+          <div class="input-group pull-right" role="group">
+            <div class="input-group-addon">Na stronę:</div>
+            <div class="input-group">
+              <select id="pagesize" class="form-control">
+                <option value="50" selected="selected">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="500">500</option>
+                <option value="1000">1000</option>
+              </select>
+            </div>
+            <span class="input-group-addon">razem: <span id="paginate-count">1000</span></span>
           </div>
-          <span class="input-group-addon">razem: <span id="paginate-count">1000</span></span>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel">
+        <div class="table-responsive">
+          <table class="data-table table table-striped table-hover table-paginate">
+            <thead>
+              <tr class="text-center">
+                <th colspan="2">Miejsce</th>
+                <th class="pid" colspan="2">PID</th>
+                <th>
+                  Zawodnik
+                  <span class="glyphicon glyphicon-question-sign auto-tooltip"
+                        title="Kliknięcie w wiersz wyświetla historię zawodnika"></span>
+                </th>
+                <th class="club">Klub</th>
+                <th class="region" colspan="3">Okręg</th>
+                <th class="gender" colspan="3">Płeć</th>
+                <th class="age" colspan="3">Kat. wiekowa</th>
+                <th class="ranking">Wynik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="place text-right">
+                  <span class="rank"></span>
+                </td>
+                <td class="place">
+                  <span class="change label"></span>
+                </td>
+                <td class="pid text-right"></td>
+                <td class="pidlink">
+                  <a href="" target="_blank">
+                    <span class="glyphicon glyphicon-new-window"></span>
+                  </a>
+                </td>
+                <td class="name"></td>
+                <td class="club"></td>
+                <td class="region text-center"></td>
+                <td class="region-place text-right">
+                  <span class="rank"></span>
+                </td>
+                <td class="region-place">
+                  <span class="change label"></span>
+                </td>
+                <td class="gender text-center"></td>
+                <td class="gender-place text-right">
+                  <span class="rank"></span>
+                </td>
+                <td class="gender-place">
+                  <span class="change label"></span>
+                </td>
+                <td class="age text-center"></td>
+                <td class="age-place text-right">
+                  <span class="rank"></span>
+                </td>
+                <td class="age-place">
+                  <span class="change label"></span>
+                </td>
+                <td class="ranking text-right">
+                  <span class="auto-tooltip"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <br />
-      <div class="table-responsive">
-        <table class="data-table table table-striped table-hover table-paginate">
-          <thead>
-            <tr class="text-center">
-              <th colspan="2">Miejsce</th>
-              <th class="pid" colspan="2">PID</th>
-              <th>
-                Zawodnik
-                <span class="glyphicon glyphicon-question-sign auto-tooltip"
-                      title="Kliknięcie w wiersz wyświetla historię zawodnika"></span>
-              </th>
-              <th class="club">Klub</th>
-              <th class="region" colspan="3">Okręg</th>
-              <th class="gender" colspan="3">Płeć</th>
-              <th class="age" colspan="3">Kat. wiekowa</th>
-              <th class="ranking">Wynik</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="place text-right">
-                <span class="rank"></span>
-              </td>
-              <td class="place">
-                <span class="change label"></span>
-              </td>
-              <td class="pid text-right"></td>
-              <td class="pidlink">
-                <a href="" target="_blank">
-                  <span class="glyphicon glyphicon-new-window"></span>
-                </a>
-              </td>
-              <td class="name"></td>
-              <td class="club"></td>
-              <td class="region text-center"></td>
-              <td class="region-place text-right">
-                <span class="rank"></span>
-              </td>
-              <td class="region-place">
-                <span class="change label"></span>
-              </td>
-              <td class="gender text-center"></td>
-              <td class="gender-place text-right">
-                <span class="rank"></span>
-              </td>
-              <td class="gender-place">
-                <span class="change label"></span>
-              </td>
-              <td class="age text-center"></td>
-              <td class="age-place text-right">
-                <span class="rank"></span>
-              </td>
-              <td class="age-place">
-                <span class="change label"></span>
-              </td>
-              <td class="ranking text-right">
-                <span class="auto-tooltip"></span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="panel">
         <div id="bottom-paginator" class="text-center"></div>
-        <br />
+        <div class="clearfix"></div>
       </div>
       <div class="well well-sm">
         &copy; 2017 - dla <a href="http://pzbs.pl">PZBS</a> zrobił <a href="https://emkael.info">mkl.</a>
