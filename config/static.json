@@ -1,0 +1,20 @@
+[
+    {
+        "url": ".",
+        "label": "Ranking",
+        "header": "Strona główna Rankingu",
+        "content": ""
+    },
+    {
+        "url": "jak-powstal-ranking.html",
+        "label": "Jak powstał Ranking?",
+        "header": "Jak powstał Ranking?",
+        "content": "ranking.html"
+    },
+    {
+        "url": "metoda-obliczania-rankingu.html",
+        "label": "Metoda obliczania",
+        "header": "Metoda obliczania Rankingu",
+        "content": "metoda.html"
+    }
+]

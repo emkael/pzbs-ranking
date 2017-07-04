@@ -39,3 +39,14 @@
 }
 .table > thead th { text-align: center }
 .table.history > tbody > tr { cursor: auto }
+
+.container { position: relative; }
+.static-menu {
+    position: absolute;
+    display: inline-block;
+    width: auto;
+    top: 0;
+    right: 0;
+    margin: 0 15px;
+}
+.static-menu .btn { border-top-left-radius: 0; border-top-right-radius: 0 }
