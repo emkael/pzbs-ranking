@@ -53,7 +53,7 @@ var ranking = {
         hashParams.forEach(function(hashParam) {
             var param = hashParam.split(':');
             if (param.length > 1) {
-                params.set(param[0], param[1].split(','));
+                params.set(param[0], decodeURI(param[1]).split(','));
             }
         });
         return params;
