@@ -1,4 +1,4 @@
-all: rankings players
+all: statics rankings players menus
 
 targetfiles := $(shell bin/target-ranking-files.sh config/dates.json)
 tmpfiles := $(patsubst %.html,http/%.html.tmp,$(targetfiles))
@@ -16,6 +16,12 @@ $(rankfiles):
 
 players:
 	bin/build-players.sh http
+
+statics:
+	bin/generate-statics.sh config/static.json static http
+
+menus:
+	bin/write-menus.sh config/static.json http
 
 minimize: $(tmpfiles)
 
