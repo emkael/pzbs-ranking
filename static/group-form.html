@@ -1,0 +1,63 @@
+<div class="col-sm-4">
+  <p>
+    Wpisz poniżej PZBS ID zawodników w parze/teamie.
+  </p>
+  <p>
+    Dla niezrzeszonych, podaj 0.
+  </p>
+  <form>
+    <div class="form-group">
+      <label for="group-pids">PZBS ID:</label>
+      <textarea id="group-pids" class="form-control" rows="6"></textarea>
+    </div>
+    <button id="group-submit" type="button" class="btn btn-default">Przelicz</button>
+  </form>
+  <br />
+  <table id="group-results" class="table history">
+    <tr class="mean">
+      <th>ŚM</th>
+      <td colspan="2" class="mean-place text-right"></td>
+    </tr>
+    <tr class="mean">
+      <th>ŚA</th>
+      <td colspan="2" class="mean-arithmetic text-right"></td>
+    </tr>
+    <tr class="mean">
+      <th>ŚG</th>
+      <td colspan="2" class="mean-geometric text-right"></td>
+    </tr>
+    <tr class="mean">
+      <th>ŚH</th>
+      <td colspan="2" class="mean-harmonic text-right"></td>
+    </tr>
+  </table>
+</div>
+<div class="col-sm-8">
+  <p>
+    Możesz również wczytać plik pełnych wyników turnieju z JFR Pary (plik W-*.html), żeby wyświetlić statystyki wszystkich par grających w turnieju.
+  </p>
+  <form>
+    <input type="file" id="tournament-file" />
+  </form>
+  <br />
+  <table id="tournament-table" class="table history">
+    <thead>
+      <tr>
+        <th data-sort-method="number">M-ce</th>
+        <th data-sort-method="none">Para</th>
+        <th data-sort-method="dotsep">ŚM</th>
+        <th data-sort-method="dotsep">ŚA</th>
+        <th data-sort-method="dotsep">ŚG</th>
+        <th data-sort-method="dotsep">ŚH</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+<script src="res/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="res/fileinput.min.css" />
+<script src="res/fileinput.min.js"></script>
+<link rel="stylesheet" href="res/tablesort.css" />
+<script src="res/tablesort.min.js"></script>
+<script src="res/group-ranking.js"></script>

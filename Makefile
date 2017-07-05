@@ -26,6 +26,10 @@ statics:
 menus:
 	bin/write-menus.sh config/static.json http
 
+group-tools:
+	python static.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
+	python static-menu.py config/static.json http/ranking-grupowy.html http
+
 minimize: $(tmpfiles)
 
 $(tmpfiles):
