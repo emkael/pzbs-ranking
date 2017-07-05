@@ -4,7 +4,7 @@ targetfiles := $(shell bin/target-ranking-files.sh config/dates.json)
 tmpfiles := $(patsubst %.html,http/%.html.tmp,$(targetfiles))
 rankfiles := $(patsubst %.html,http/%.html.ed,$(targetfiles))
 
-rankings: tables editions
+rankings: tables editions json
 
 tables:
 	bin/build-rankings.sh config/dates.json http
@@ -13,6 +13,9 @@ editions: tables $(rankfiles)
 
 $(rankfiles):
 	python editions.py $(patsubst %.ed,%,$@)
+
+json:
+	bin/generate-json.sh config/dates.json http
 
 players:
 	bin/build-players.sh http
