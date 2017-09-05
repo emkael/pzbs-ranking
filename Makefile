@@ -9,7 +9,7 @@ rankings: tables editions json
 tables:
 	bin/build-rankings.sh config/dates.json http
 
-editions: tables $(rankfiles)
+editions: $(rankfiles)
 
 $(rankfiles):
 	python editions.py $(patsubst %.ed,%,$@)
