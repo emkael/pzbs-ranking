@@ -1,38 +1,3 @@
-$.fn.paginate = function(pagesize, page) {
-
-    var $this = this;
-    if (pagesize == 'clear') {
-        $this.removeAttr('data-paginate');
-        $this.find('[data-paginate-visible]').removeAttr('data-paginate-visible');
-        $this.find('tbody tr').show();
-        return;
-    }
-
-    var pagesize = pagesize || 50;
-    var page = page || 1;
-
-    var rows = $this.find('tbody tr');
-    if (!$this.attr('data-paginate')) {
-        $this.attr('data-paginate', pagesize);
-        rows.filter(':visible').attr('data-paginate-visible', 1);
-    } else {
-        pagesize = parseInt($this.attr('data-paginate'));
-    }
-
-    var visible = rows.filter('[data-paginate-visible=1]');
-    visible.each(function(index, row) {
-        row = $(row);
-        if (index >= (page-1)*pagesize
-            && index < page*pagesize) {
-            row.show();
-        } else { // rollin', rollin', rollin'...
-            row.hide();
-        }
-    });
-
-    return visible.size();
-};
-
 var ranking = {
 
     rankingData : {},
@@ -88,7 +53,7 @@ var ranking = {
 
     readHash : function(force) {
         var params = ranking.parseHash(location.hash);
-        var allParams = ['age', 'gender', 'region', 'name'];
+        var allParams = ['age', 'gender', 'region', 'name', 'page', 'pagesize'];
         var paramsChanged = false;
         if (force) {
             paramsChanged = true;
@@ -123,25 +88,11 @@ var ranking = {
             $('#filters').collapse();
         }
         if (paramsChanged) {
-            $('table.table-paginate').paginate('clear');
             ranking.filterRows(params);
             ranking.savedParams = params;
         }
         $('table.data-table, .filters .panel-body').css('opacity', 1);
         ranking.filtersDisabled = false;
-        ranking.paginate(params);
-    },
-
-    paginate: function(params) {
-        var pagesize = params.get('pagesize') ? parseInt(params.get('pagesize')[0]) : parseInt($('select#pagesize').val());
-        var page = params.get('page') || [0];
-        var count = $('table.table-paginate').paginate(pagesize, parseInt(page[0]));
-        $('table.data-table tbody tr[data-paginate-visible=1]').eq(0).addClass('gold');
-        $('table.data-table tbody tr[data-paginate-visible=1]').eq(1).addClass('silver');
-        $('table.data-table tbody tr[data-paginate-visible=1]').eq(2).addClass('bronze');
-        ranking.buildPaginator('#top-paginator', count, pagesize, page[0] || 1);
-        ranking.buildPaginator('#bottom-paginator', count, pagesize, page[0] || 1);
-        $(document).trigger('pagesizeChanged', { 'count': count, 'size': pagesize });
     },
 
     filtersDisabled: false,
@@ -166,9 +117,23 @@ var ranking = {
                 displayRows.push(row);
             }
         });
+        var allCount = displayRows.length;
+        var page = params.get('page') || [0];
+        page = parseInt(page[0]) || 1;
+        var pagesize = params.get('pagesize') || [0];
+        pagesize = parseInt(pagesize[0]) || parseInt($('select#pagesize').val());
+        displayRows = displayRows.slice((page-1) * pagesize, page * pagesize);
         displayRows.forEach(function(row) {
             $('table.data-table tbody').append(ranking.buildTableRow(row));
         });
+        ranking.buildPaginator('#top-paginator', allCount, pagesize, page);
+        ranking.buildPaginator('#bottom-paginator', allCount, pagesize, page);
+        $(document).trigger('pagesizeInfo', { 'count': allCount, 'size': pagesize });
+        if (page == 1) {
+            $('table.data-table tbody tr').eq(0).addClass('gold');
+            $('table.data-table tbody tr').eq(1).addClass('silver');
+            $('table.data-table tbody tr').eq(2).addClass('bronze');
+        }
     },
 
     buildTableRow: function(row) {
@@ -233,7 +198,7 @@ var ranking = {
             page = currentPage + 1;
         }
         var count = parseInt(btn.closest('[data-pages]').attr('data-pages'));
-        if (page > 0 && page <= count) {
+        if (page > 0 && page <= count && page != currentPage) {
             params.set('page', [page]);
             location.hash = ranking.constructHash(params);
         } else {
@@ -326,7 +291,6 @@ var ranking = {
         });
 
         $('select#pagesize').change(function() {
-            $('table.data-table').removeAttr('data-paginate');
             handleParams(function(target, ev) {
                 var params = ranking.parseHash(location.hash);
                 params.delete('page');
@@ -337,7 +301,7 @@ var ranking = {
 
         $(document).on('click', 'button.paginator-prev, button.paginator-next, button.paginator-page', ranking.changePage);
 
-        $(document).on('pagesizeChanged', function(ev, params) {
+        $(document).on('pagesizeInfo', function(ev, params) {
             $('span#paginate-count').text(params.count);
             $('select#pagesize').val(params.size);
         });
