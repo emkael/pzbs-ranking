@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('div.panel').eq(2).hide();
-    $.getJSON('res/ranking.json', function(data) {
+    $.getJSON('data/group-data.json', function(data) {
         var minRating = Number.POSITIVE_INFINITY;
         for (var pid in data) {
             if (data[pid].score < minRating) {
