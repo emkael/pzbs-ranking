@@ -35,6 +35,17 @@ $.fn.paginate = function(pagesize, page) {
 
 var ranking = {
 
+    rankingData : {},
+
+    tableRowTemplate: undefined,
+
+    loadData : function(url, callback) {
+        $.getJSON(url, function(data) {
+            ranking.rankingData = data;
+            callback();
+        });
+    },
+
     playerClick : function(ev) {
         if (!$(ev.target).closest('a').size()) {
             var row = $(this);
@@ -75,15 +86,16 @@ var ranking = {
         return (newParam.length != oldParam.length) || (newParam.join(',') != oldParam.join(','));
     },
 
-    readHash : function() {
+    readHash : function(force) {
         var params = ranking.parseHash(location.hash);
         var allParams = ['age', 'gender', 'region', 'name'];
         var paramsChanged = false;
-        allParams.forEach(function(param) {
-            paramsChanged |= ranking.paramChanged(params, param);
-        });
-        if (ranking.paramChanged(params, 'pagesize')) {
-            $('table.data-table').removeAttr('data-paginate');
+        if (force) {
+            paramsChanged = true;
+        } else {
+            allParams.forEach(function(param) {
+                paramsChanged |= ranking.paramChanged(params, param);
+            });
         }
         $('button.btn-primary').removeClass('btn-primary');
         params.forEach(function(values, param) {
@@ -135,26 +147,58 @@ var ranking = {
     filtersDisabled: false,
 
     filterRows : function(params) {
-        $('table.data-table tbody tr').show().removeClass('gold silver bronze').each(function() {
-            var row = $(this);
+        $('table.data-table tbody tr').remove();
+        var displayRows = [];
+        ranking.rankingData.forEach(function(row) {
             var hidden = false;
             params.forEach(function(value, param) {
                 if (param == 'name') {
-                    if (row.find('td.' + param).text().trim().toLowerCase().search(value.join('')) == -1) {
-                        row.hide();
+                    if (row['player'].trim().toLowerCase().search(value.join('')) == -1) {
                         hidden = true;
                     }
                 } else if (param.substr(0, 4) != 'page') {
-                    if (value.indexOf(row.find('td.' + param).text().trim()) == -1) {
-                        row.hide();
+                    if (value.indexOf(row[param].trim()) == -1) {
                         hidden = true;
                     }
                 }
             });
             if (!hidden) {
-                row.show();
+                displayRows.push(row);
             }
         });
+        displayRows.forEach(function(row) {
+            $('table.data-table tbody').append(ranking.buildTableRow(row));
+        });
+    },
+
+    buildTableRow: function(row) {
+        var tableRow = ranking.tableRowTemplate.clone(true);
+        tableRow.find('td.pid').text(row['pid']);
+        tableRow.find('td.pidlink a').attr(
+            'href',
+            'https://msc.com.pl/cezar/?p=21&pid=' + row['pid']
+        );
+        tableRow.find('td.name').text(row['player']);
+        tableRow.find('td.club').text(row['club']);
+        ['gender', 'age', 'region'].forEach(function(category) {
+            tableRow.find('td.' + category).text(row[category]);
+            var categoryPlace = tableRow.find('td.' + category + '-place');
+            categoryPlace.find('.rank').text(row[category + '-place']);
+            var badge = categoryPlace.find('.change');
+            badge.text(row[category + '-change']);
+            badge.addClass('label-' + row[category + '-change-class']);
+            if (row[category + '-place'] == 1) {
+                tableRow.addClass('info');
+            }
+        });
+        var scoreCell = tableRow.find('td.ranking span');
+        scoreCell.attr('title', row['score']);
+        scoreCell.text(row['score'].toFixed(2));
+        tableRow.find('td.place .rank').text(row['place']);
+        var badge = tableRow.find('td.place .change');
+        badge.text(row['place-change']);
+        badge.addClass('label-' + row['place-change-class']);
+        return tableRow;
     },
 
     buildPaginator: function(selector, count, pagesize, page) {
@@ -199,14 +243,21 @@ var ranking = {
 
     init : function() {
 
-        $('.container .table tbody tr').click(ranking.playerClick);
-
         $(document).ready(function() {
-            $(window).on('hashchange', function() {
+            $(window).on('hashchange', function(ev, params) {
+                var force = params ? params['force'] : false;
                 ranking.filtersDisabled = true;
                 $('table.data-table, .filters .panel-body').css('opacity', 0.1);
-                ranking.readHash();
-            }).trigger('hashchange');
+                ranking.readHash(force);
+            });
+            ranking.tableRowTemplate = $('table.data-table tbody tr').remove();
+            ranking.tableRowTemplate.click(ranking.playerClick);
+            ranking.loadData(
+                $('table.data-table').attr('data-ranking'),
+                function() {
+                    $(window).trigger('hashchange', {'force': true});
+                }
+            );
         });
 
         var handleParams = function(callback, target, ev) {
