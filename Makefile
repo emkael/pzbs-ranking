@@ -4,7 +4,10 @@ targetfiles := $(shell bin/target-ranking-files.sh config/dates.json)
 tmpfiles := $(patsubst %.html,http/%.html.tmp,$(targetfiles))
 rankfiles := $(patsubst %.html,http/%.html.ed,$(targetfiles))
 
-rankings: tables editions json
+rankings: datafiles tables editions json
+
+datafiles:
+	bin/build-datafiles.sh config/dates.json http/data
 
 tables:
 	bin/build-rankings.sh config/dates.json http
