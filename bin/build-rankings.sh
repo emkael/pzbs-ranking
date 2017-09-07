@@ -7,6 +7,6 @@ cat $CONFIG |
     xargs -n4 |
     while read DATE URL INDEX NAME
     do
-        python ranking.py "$NAME" $INDEX $DATE $PREV_DATE > $DIR/$URL
+        python scripts/ranking.py "$NAME" $INDEX $DATE $PREV_DATE > $DIR/$URL
         PREV_DATE=$DATE
     done

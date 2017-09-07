@@ -15,7 +15,7 @@ tables:
 editions: $(rankfiles)
 
 $(rankfiles):
-	python editions.py $(patsubst %.ed,%,$@)
+	python scripts/editions.py $(patsubst %.ed,%,$@)
 
 json:
 	bin/generate-json.sh config/dates.json http
@@ -30,8 +30,8 @@ menus:
 	bin/write-menus.sh config/static.json http
 
 group-tools:
-	python static.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
-	python static-menu.py config/static.json http/ranking-grupowy.html http
+	python scripts/static.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
+	python scripts/static-menu.py config/static.json http/ranking-grupowy.html http
 
 minimize: $(tmpfiles)
 

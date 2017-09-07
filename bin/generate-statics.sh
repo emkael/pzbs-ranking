@@ -10,6 +10,6 @@ cat $1 |
         read OUTPUT_FILE
         if [ -n "$CONTENT_FILE" ]
         then
-            python static.py $CONTENT_DIR/$CONTENT_FILE "$HEADER" > $OUTPUT_DIR/$OUTPUT_FILE
+            python scripts/static.py $CONTENT_DIR/$CONTENT_FILE "$HEADER" > $OUTPUT_DIR/$OUTPUT_FILE
         fi
     done
