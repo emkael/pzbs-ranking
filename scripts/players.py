@@ -4,6 +4,7 @@ from math import ceil
 from pyranking.fetch import fetch_ranking
 
 output_directory = sys.argv[1]
+pagesize = 100.0
 
 dates = {}
 for date_config in json.load(file('config/dates.json')):
@@ -61,9 +62,9 @@ for pid, player in players.iteritems():
         rank_link = row.find('td').a
         rank_link.string = '.'.join(date.split('-')[::-1])
         base_rank_link = '../%s' % (dates[date])
-        if ranking is not None and ranking['place'] > 100:
+        if ranking is not None and ranking['place'] > int(pagesize):
             rank_link['href'] = '../%s#page:%d' % (
-                dates[date], ceil(ranking['place'] / 100.0)
+                dates[date], ceil(ranking['place'] / pagesize)
             )
         else:
             rank_link['href'] = base_rank_link
@@ -73,9 +74,9 @@ for pid, player in players.iteritems():
             score_cell['title'] = str(ranking['score'])
             for field in ['region', 'age', 'gender']:
                 link = row.select('td.'+field+' a')[0]
-                if ranking[field+'-place'] > 100:
+                if ranking[field+'-place'] > int(pagesize):
                     link['href'] = base_rank_link + '#%s:%s;page:%d' % (
-                        field, ranking[field], ceil(ranking[field+'-place'] / 100.0)
+                        field, ranking[field], ceil(ranking[field+'-place'] / pagesize)
                     )
                 else:
                     link['href'] = base_rank_link + '#%s:%s' % (
