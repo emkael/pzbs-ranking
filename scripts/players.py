@@ -6,6 +6,9 @@ from pyranking.fetch import fetch_ranking
 output_directory = sys.argv[1]
 pagesize = 100.0
 
+menu_file = sys.argv[2]
+menu_content = bs4(file(menu_file), 'html.parser')
+
 dates = {}
 for date_config in json.load(file('config/dates.json')):
     dates[date_config['date']] = date_config['url']
@@ -28,7 +31,6 @@ for date in sorted(dates.keys()):
             players[player]['rankings'][date][field + '-change-class'] = 'primary'
 
 for pid, player in players.iteritems():
-
     template = bs4(file('templates/player.html'), 'lxml')
     template.select('h2.name')[0].insert(0, player['name'])
     template.select('h3.club')[0].string = player['club']
@@ -89,4 +91,8 @@ for pid, player in players.iteritems():
                 change_label.string = ranking[field+'change']
                 change_label['class'] = change_label['class'] + ['label-'+ranking[field+'change-class']]
         template.select('table.table tbody')[0].insert(0, row)
-        file(os.path.join(output_directory, '%d.html' % pid), 'w').write(template.prettify().encode('utf-8'))
+
+    menu = template.select('div.static-menu')[0]
+    menu.append(copy.copy(menu_content))
+
+    file(os.path.join(output_directory, '%d.html' % pid), 'w').write(template.prettify().encode('utf-8'))
