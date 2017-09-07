@@ -1,7 +1,7 @@
 import os, sys
 from bs4 import BeautifulSoup as bs4
 
-ranking_date = sys.argv[3]
+ranking_date = sys.argv[4]
 subtitle = 'notowanie %s (%s), stan na %s' % (
     sys.argv[1], sys.argv[2], '.'.join(ranking_date.split('-')[::-1])
 )
@@ -17,5 +17,10 @@ script_src['src'] = '%s?%d' % ('_res/ranking.js', os.path.getmtime('http/_res/ra
 
 rawlink = table.select('a#rawlink')[0]
 rawlink['href'] = '%s/%s.csv' % (rawlink['href'], ranking_date)
+
+menu_file = file(sys.argv[3])
+menu = table.select('div.static-menu')[0]
+menu.clear()
+menu.append(bs4(menu_file, 'html.parser'))
 
 print table.prettify().encode('utf-8')

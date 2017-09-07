@@ -1,4 +1,9 @@
 #!/bin/bash
 CONFIG_FILE=$1
 DIRECTORY=$2
-find $DIRECTORY -name \*.html -exec python scripts/static-menu.py $CONFIG_FILE {} $DIRECTORY \;
+mkdir -p $DIRECTORY/players
+find $DIRECTORY -type d -not -name _\* |
+    while read HTMLDIR
+    do
+        python scripts/generate-static-menu.py $CONFIG_FILE $DIRECTORY $HTMLDIR > $HTMLDIR/.menu.html
+    done

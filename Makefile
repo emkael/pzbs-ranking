@@ -1,13 +1,16 @@
-all: statics rankings players menus
+all: statics rankings players
 
 targetfiles := $(shell bin/target-ranking-files.sh config/dates.json)
 tmpfiles := $(patsubst %.html,http/%.html.tmp,$(targetfiles))
 rankfiles := $(patsubst %.html,http/%.html.ed,$(targetfiles))
 
-rankings: datafiles tables editions json
+rankings: datafiles menus tables editions json
 
 datafiles:
 	bin/build-datafiles.sh config/dates.json http/_data
+
+menus:
+	bin/write-menus.sh config/static.json http
 
 tables:
 	bin/build-rankings.sh config/dates.json http
@@ -26,9 +29,6 @@ players:
 statics:
 	python scripts/generate-static-menu.py config/static.json http http > http/.menu.html
 	bin/generate-statics.sh config/static.json static http
-
-menus:
-	bin/write-menus.sh config/static.json http
 
 group-tools:
 	python scripts/static.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
