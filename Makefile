@@ -24,6 +24,7 @@ players:
 	bin/build-players.sh http
 
 statics:
+	python scripts/generate-static-menu.py config/static.json http http > http/.menu.html
 	bin/generate-statics.sh config/static.json static http
 
 menus:
@@ -31,7 +32,8 @@ menus:
 
 group-tools:
 	python scripts/static.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
-	python scripts/static-menu.py config/static.json http/ranking-grupowy.html http
+	python scripts/generate-static-menu.py config/static.json http http > http/.menu.html
+	python scripts/static-menu.py http/ranking-grupowy.html http/.menu.html
 
 minimize: $(tmpfiles)
 
@@ -40,6 +42,7 @@ $(tmpfiles):
 	mv $@ $(patsubst %.tmp,%,$@)
 
 deploy:
+	find http -type f -name .menu.html -delete
 	bin/deploy.sh
 
 clean:

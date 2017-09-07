@@ -11,5 +11,6 @@ cat $1 |
         if [ -n "$CONTENT_FILE" ]
         then
             python scripts/static.py $CONTENT_DIR/$CONTENT_FILE "$HEADER" > $OUTPUT_DIR/$OUTPUT_FILE
+            python scripts/static-menu.py $OUTPUT_DIR/$OUTPUT_FILE $OUTPUT_DIR/.menu.html
         fi
     done
