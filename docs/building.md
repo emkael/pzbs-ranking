@@ -34,7 +34,7 @@ You can also use subtargets of `make`, which (re)build only part of the content:
 The subtarget for `rankings` is separated into several stages, some of them independent:
 
  * `make datafiles` generates JSON data files that HTML front-end loads to display tables of ranking data
- * `make menus` pre-generates top menu to insert into HTML pages for ranking pages
+ * `make menus` pre-generates top menu to insert into HTML pages for ranking pages (this subtarget is also a dependency for `make players`)
  * `make tables` generates ranking table HTML pages for editions defined in `config/dates.json`
  * `make editions` compiles editions menu into ranking table pages (e.g. if you're not rebuilding all ranking pages and just generating the newest)
  * `make group-json` updates JSON data file for group ranking tools (below)

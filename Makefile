@@ -20,7 +20,9 @@ editions: $(rankfiles)
 $(rankfiles):
 	python scripts/rankings-editions.py $(patsubst %.ed,%,$@)
 
-players:
+players: menus player-pages
+
+player-pages:
 	bin/players-build.sh http
 
 statics:
