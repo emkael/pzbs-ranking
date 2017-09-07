@@ -37,7 +37,9 @@ CREATE TABLE `rankings` (
   `place` int(11) NOT NULL,
   `score` decimal(8,4) NOT NULL,
   `region` varchar(2) COLLATE utf8_unicode_520_ci NOT NULL,
-  `flags` varchar(2) COLLATE utf8_unicode_520_ci NOT NULL
+  `flags` varchar(2) COLLATE utf8_unicode_520_ci NOT NULL,
+  `rank` decimal(3,1) NOT NULL,
+  `club` varchar(100) COLLATE utf8_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
 
 -- --------------------------------------------------------
