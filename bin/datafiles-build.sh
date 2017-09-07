@@ -6,6 +6,6 @@ cat $CONFIG |
     jq -r '.[] | .date' |
     while read DATE
     do
-        python scripts/datafile.py $DATE $PREV_DATE > "$DIR/$DATE.json"
+        python scripts/datafiles-generate.py $DATE $PREV_DATE > "$DIR/$DATE.json"
         PREV_DATE=$DATE
     done

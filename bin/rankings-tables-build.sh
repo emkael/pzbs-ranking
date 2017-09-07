@@ -6,5 +6,5 @@ cat $CONFIG |
     xargs -n4 |
     while read DATE URL INDEX NAME
     do
-        python scripts/ranking.py "$NAME" $INDEX $DIR/.menu.html $DATE > $DIR/$URL
+        python scripts/rankings-tables-compile.py "$NAME" $INDEX $DIR/.menu.html $DATE > $DIR/$URL
     done

@@ -1,39 +1,39 @@
 all: statics rankings players
 
-targetfiles := $(shell bin/target-ranking-files.sh config/dates.json)
+targetfiles := $(shell bin/rankings-target-files.sh config/dates.json)
 tmpfiles := $(patsubst %.html,http/%.html.tmp,$(targetfiles))
 rankfiles := $(patsubst %.html,http/%.html.ed,$(targetfiles))
 
-rankings: datafiles menus tables editions json
+rankings: datafiles menus tables editions group-json
 
 datafiles:
-	bin/build-datafiles.sh config/dates.json http/_data
+	bin/datafiles-build.sh config/dates.json http/_data
 
 menus:
-	bin/write-menus.sh config/static.json http
+	bin/menus-build.sh config/static.json http
 
 tables:
-	bin/build-rankings.sh config/dates.json http
+	bin/rankings-tables-build.sh config/dates.json http
 
 editions: $(rankfiles)
 
 $(rankfiles):
-	python scripts/editions.py $(patsubst %.ed,%,$@)
-
-json:
-	bin/generate-json.sh config/dates.json http
+	python scripts/rankings-editions.py $(patsubst %.ed,%,$@)
 
 players:
-	bin/build-players.sh http
+	bin/players-build.sh http
 
 statics:
-	python scripts/generate-static-menu.py config/static.json http http > http/.menu.html
-	bin/generate-statics.sh config/static.json static http
+	python scripts/menus-compile.py config/static.json http http > http/.menu.html
+	bin/statics-generate.sh config/static.json static http
+
+group-json:
+	bin/group-tools-json.sh config/dates.json http
 
 group-tools:
-	python scripts/static.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
-	python scripts/generate-static-menu.py config/static.json http http > http/.menu.html
-	python scripts/static-menu.py http/ranking-grupowy.html http/.menu.html
+	python scripts/statics-compile.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
+	python scripts/menus-compile.py config/static.json http http > http/.menu.html
+	python scripts/menus-write.py http/ranking-grupowy.html http/.menu.html
 
 minimize: $(tmpfiles)
 
