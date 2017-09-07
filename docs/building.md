@@ -1,31 +1,4 @@
-To build initial ranking:
-
-```
-python scripts/ranking.py RANKING_NAME RANKING_INDEX DATE > http/FILENAME.html
-```
-
-To build subsequent rankings:
-
-```
-python scripts/ranking.py RANKING_NAME RANKING_INDEX DATE PREVIOUS_DATE > http/FILENAME.html
-```
-
-To compile edition list header into ranking:
-
-```
-python scripts/editions.py http/FILENAME.html
-```
-
-To build players' pages:
-```
-python scripts/players.py http/players/
-```
-
-Name, surname and club are always used from the current `players` table. Regions, genders and age categories are read per-ranking.
-
----
-
-Provided, is also a Makefile to do all the work within a standard setup.
+There's a Makefile provided to do all the work within a standard setup.
 
 To build all the pages, use:
 
@@ -54,5 +27,16 @@ If you want to use some other way of deploying content to your target environmen
 
 You can also use subtargets of `make`, which (re)build only part of the content:
 
- * `make rankings` builds only ranking pages (and consists of `make tables` which creates ranking tables and `make editions` which inserts ranking editions menu into ranking page - useful if you generated ranking page for an edition manually and now you only want to re-render that menu in other ranking pages)
+ * `make statics` build pre-defined static pages, using `static.html` template and content files from `static/` defined as in `config/static.json`
+ * `make rankings` builds only ranking pages
  * `make players` builds only players pages
+
+The subtarget for `rankings` is separated into several stages, some of them independent:
+
+ * `make datafiles` generates JSON data files that HTML front-end loads to display tables of ranking data
+ * `make menus` pre-generates top menu to insert into HTML pages for ranking pages
+ * `make tables` generates ranking table HTML pages for editions defined in `config/dates.json`
+ * `make editions` compiles editions menu into ranking table pages (e.g. if you're not rebuilding all ranking pages and just generating the newest)
+ * `make group-json` updates JSON data file for group ranking tools (below)
+
+The special target `make group-tools` compiles special static page that consists of some forms to calculate cumulative ranking for groups of contestants.
