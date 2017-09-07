@@ -7,7 +7,7 @@ rankfiles := $(patsubst %.html,http/%.html.ed,$(targetfiles))
 rankings: datafiles tables editions json
 
 datafiles:
-	bin/build-datafiles.sh config/dates.json http/data
+	bin/build-datafiles.sh config/dates.json http/_data
 
 tables:
 	bin/build-rankings.sh config/dates.json http
