@@ -45,7 +45,7 @@ $(tmpfiles):
 
 deploy:
 	find http -type f -name .menu.html -delete
-	bin/deploy.sh
+	bin/deploy.sh http
 
 clean:
 	find http -type f -name \*.html -delete
