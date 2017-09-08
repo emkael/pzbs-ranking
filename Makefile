@@ -44,7 +44,6 @@ $(tmpfiles):
 	mv $@ $(patsubst %.tmp,%,$@)
 
 deploy:
-	find http -type f -name .menu.html -delete
 	bin/deploy.sh http
 
 clean:

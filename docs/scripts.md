@@ -119,3 +119,5 @@ Deployment scripts
 `deploy.sh`
 
 Just run it to sync pages output directory (script's parameter) with a remote location, via `rsync`. If `config/deploy-pass` is present, it's provided to rsync via `sshpass`. `config/deploy-path` defines remote path for sync.
+
+Temporary menu HTML snippet files are ignored while deploying.
