@@ -33,9 +33,9 @@ $(document).on('rankingLoaded', function(ev, params) {
 
     var getPlace = function(pid) {
         if (params.ranks[pid]) {
-            return params.ranks[pid].place || 1500;
+            return params.ranks[pid].place || 2500;
         }
-        return 1500;
+        return 2500;
     };
 
     var averages = {
