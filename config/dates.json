@@ -25,8 +25,14 @@
     },
     {
         "date": "2017-12-31",
-        "url": "index.html",
+        "url": "2018-01.html",
         "name": "I 2018",
         "index": "5"
+    },
+    {
+        "date": "2018-03-31",
+        "url": "index.html",
+        "name": "II 2018",
+        "index": "6"
     }
 ]
