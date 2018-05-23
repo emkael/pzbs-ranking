@@ -53,7 +53,7 @@ var ranking = {
 
     readHash : function(force) {
         var params = ranking.parseHash(location.hash);
-        var allParams = ['age', 'gender', 'region', 'name', 'page', 'pagesize'];
+        var allParams = ['age', 'gender', 'region', 'name', 'page', 'pagesize', 'club'];
         var paramsChanged = false;
         if (force) {
             paramsChanged = true;
@@ -105,6 +105,10 @@ var ranking = {
             params.forEach(function(value, param) {
                 if (param == 'name') {
                     if (row['player'].trim().toLowerCase().search(value.join('')) == -1) {
+                        hidden = true;
+                    }
+                } else if (param == 'club') {
+                    if (row['club'].trim().toLowerCase().search(value.join('')) == -1) {
                         hidden = true;
                     }
                 } else if (param.substr(0, 4) != 'page') {
