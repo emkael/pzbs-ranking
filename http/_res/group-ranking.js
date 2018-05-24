@@ -21,21 +21,16 @@ $(document).on('rankingLoaded', function(ev, params) {
 
     var getScore = function(pid) {
         if (params.ranks[pid]) {
-            return params.ranks[pid].score ||
-                Math.max(
-                    0.1, Math.min(
-                        params.minRating, params.ranks[pid].rank * 2.0
-                    )
-                );
+            return params.ranks[pid].score || 0.1;
         }
         return 0.1;
     };
 
     var getPlace = function(pid) {
         if (params.ranks[pid]) {
-            return params.ranks[pid].place || 2500;
+            return params.ranks[pid].place || 7000;
         }
-        return 2500;
+        return 7000;
     };
 
     var averages = {
