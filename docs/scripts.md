@@ -121,3 +121,74 @@ Deployment scripts
 Just run it to sync pages output directory (script's parameter) with a remote location, via `rsync`. If `config/deploy-pass` is present, it's provided to rsync via `sshpass`. `config/deploy-path` defines remote path for sync.
 
 Temporary menu HTML snippet files are ignored while deploying.
+
+`scripts` - Python scripts
+==========================
+
+`pyranking`
+
+Subdirectory contains Python modules shared between scripts, used to fetch rankings from the database.
+
+Data import scripts
+-------------------
+
+`rankings-csv-convert.py`
+
+Converts ranking CSV provided by MSC Cezar to format which can be easily loaded into the database.
+
+Data export scripts
+-------------------
+
+`datafiles-generate.py`
+
+Dumps processed ranking data for specified date in JSON format. If a second date is provided, changes in the ranking are also indicated.
+
+---
+
+`group-tools-json-generate.py`
+
+Generate JSON data dump for group tools page - ranking list for every player in the database with classification rank filling in for actual ranking for unranked players. Takes ranking date as an argument.
+
+HTML snippet generating scripts
+-------------------------------
+
+`menus-compile.py`
+
+Compiles a single HTML file containg menu snippet for static pages to be used from within specified directory, using relative links.
+
+The params are: static pages config file, base directory for static pages, target directory.
+
+---
+
+`menus-write.py`
+
+Writes a pre-compiled menu HTML snippet into HTML page. Looks for a certain, template-specific menu container within HTML page and writes provided content into it. Takes the target HTML file as first argument, HTML snippet file as the second.
+
+---
+
+`rankings-editions.py`
+
+Compiles edition menu from `dates.json` config and writes it into static HTML page, provided as the argument.
+
+HTML content generating scripts
+-------------------------------
+
+`rankings-tables-compile.py`
+
+Compiles edition data into ranking table page template. Outputs ranking table page to standard output.
+
+Parameters: edition designation (e.g. `I 2017`), edition ordinal number, static menu snippet file, edition date.
+
+---
+
+`players-compile.py`
+
+Compiles and writes player summary table HTML files for all the players in any of the rankings. Takes output directory and menu HTML snippet file for that directory as arguments.
+
+---
+
+`statics-compile.py`
+
+Compiles static page from a common template and HTML content snippets. HTML content is written to standard output.
+
+The last command line argument serves as header title for the page, all the other arguments are file paths to HTML snippets which are compiled as separate sections of the result page.
