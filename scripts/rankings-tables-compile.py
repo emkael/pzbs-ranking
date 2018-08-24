@@ -15,6 +15,9 @@ table.select('table.data-table')[0]['data-ranking'] = '_data/%s.json?%d' % (
 script_src = table.select('script[src="_res/ranking.js"]')[0]
 script_src['src'] = '%s?%d' % ('_res/ranking.js', os.path.getmtime('http/_res/ranking.js'))
 
+style_href = table.select('link[href="_res/ranking.css"]')[0]
+style_href['href'] = '%s?%d' % ('_res/ranking.css', os.path.getmtime('http/_res/ranking.css'))
+
 rawlink = table.select('a#rawlink')[0]
 rawlink['href'] = '%s/%s.csv' % (rawlink['href'], ranking_date)
 
