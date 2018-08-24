@@ -49,6 +49,12 @@ Loads the prepared ranking data CSV file (as processed by `scripts/rankings-csv-
 
 ---
 
+`hidden-import.sh`
+
+Imports PIDs of players hidden (but not disqualified) from the result pages of the rankings.
+
+---
+
 The above scripts can be used to prepare the database for generating ranking pages with any meaningful data. Data import is not covered by any `Makefile` targets, so you need to prepare the database manually (or via these scripts).
 
 For PBU data included in the repository, you'd have to run:
@@ -56,6 +62,7 @@ For PBU data included in the repository, you'd have to run:
 ```
 bin/cezar-db-fetch.sh
 bin/cezar-db-import.sh data/cezar/DATE.csv
+bin/hidden-import.sh data/hidden.csv
 ```
 
 followed by:
