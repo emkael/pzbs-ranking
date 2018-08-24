@@ -177,10 +177,8 @@ var ranking = {
                     columnCnt++;
                 }
             });
-            var fillerRow = $('<td>').attr('colspan', columnCnt);
-            filterCategories.forEach(function(category) {
-                fillerRow.attr('data-' + category, row.category);
-            });
+            var fillerRow = $('<td>').attr('colspan', columnCnt).addClass('hidden-filler');
+            fillerRow.append($('<em>ukryte</em>'));
             tableRow.append(fillerRow);
             tableRow.find('.rank').text(row['place']);
         }

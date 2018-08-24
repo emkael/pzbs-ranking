@@ -40,6 +40,10 @@
 .table > thead th { text-align: center }
 .table.history > tbody > tr { cursor: auto }
 
+.table .hidden-filler {
+    text-align: center
+}
+
 .container { position: relative; }
 .static-menu {
     position: absolute;
