@@ -7,10 +7,11 @@ REPLACE
 INTO TABLE temp_rankings
 FIELDS TERMINATED BY ',';
 INSERT INTO rankings (
-       SELECT pid, \`date\`, place, score, region, flags, rank, club
+       SELECT pid, \`date\`, place, score, region, flags, rank, club, 0
        FROM temp_rankings
        JOIN players
             ON players.id = temp_rankings.pid
 );
+UPDATE rankings SET hidden = 1 WHERE pid IN (SELECT pid FROM hidden_players);
 SET foreign_key_checks = 1
 " ${DBCONFIG[4]}

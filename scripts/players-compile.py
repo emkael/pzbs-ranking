@@ -17,18 +17,19 @@ players = {}
 
 for date in sorted(dates.keys()):
     for player, ranking in fetch_ranking(date, True).iteritems():
-        if player not in players:
-            players[player] = {'rankings':{}}
-        players[player]['name'] = ranking['player']
-        players[player]['club'] = ranking['club']
-        players[player]['rankings'][date] = {'change': 'N','change-class':'primary'}
-        for field in ['place', 'score']:
-            players[player]['rankings'][date][field] = ranking[field]
-        for field in ['gender', 'age', 'region']:
-            players[player]['rankings'][date][field] = ranking[field]
-            players[player]['rankings'][date][field + '-place'] = ranking[field + '-place']
-            players[player]['rankings'][date][field + '-change'] = 'N'
-            players[player]['rankings'][date][field + '-change-class'] = 'primary'
+        if not ranking['hidden']:
+            if player not in players:
+                players[player] = {'rankings':{}}
+            players[player]['name'] = ranking['player']
+            players[player]['club'] = ranking['club']
+            players[player]['rankings'][date] = {'change': 'N','change-class':'primary'}
+            for field in ['place', 'score']:
+                players[player]['rankings'][date][field] = ranking[field]
+            for field in ['gender', 'age', 'region']:
+                players[player]['rankings'][date][field] = ranking[field]
+                players[player]['rankings'][date][field + '-place'] = ranking[field + '-place']
+                players[player]['rankings'][date][field + '-change'] = 'N'
+                players[player]['rankings'][date][field + '-change-class'] = 'primary'
 
 for pid, player in players.iteritems():
     template = bs4(file('templates/player.html'), 'lxml')

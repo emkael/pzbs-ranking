@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, time
 from bs4 import BeautifulSoup as bs4
 
 ranking_date = sys.argv[4]
@@ -9,8 +9,8 @@ subtitle = 'notowanie %s (%s), stan na %s' % (
 table = bs4(file('templates/ranking.html'), 'lxml')
 table.select('.page-header h2 small')[0].string = subtitle
 
-table.select('table.data-table')[0]['data-ranking'] = '_data/%s.json' % (
-    ranking_date)
+table.select('table.data-table')[0]['data-ranking'] = '_data/%s.json?%d' % (
+    ranking_date, int(time.time()))
 
 script_src = table.select('script[src="_res/ranking.js"]')[0]
 script_src['src'] = '%s?%d' % ('_res/ranking.js', os.path.getmtime('http/_res/ranking.js'))

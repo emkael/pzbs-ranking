@@ -39,7 +39,8 @@ CREATE TABLE `rankings` (
   `region` varchar(2) COLLATE utf8_unicode_520_ci NOT NULL,
   `flags` varchar(2) COLLATE utf8_unicode_520_ci NOT NULL,
   `rank` decimal(3,1) NOT NULL,
-  `club` varchar(100) COLLATE utf8_unicode_520_ci NOT NULL
+  `club` varchar(100) COLLATE utf8_unicode_520_ci NOT NULL,
+  `hidden` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -56,6 +57,16 @@ CREATE TABLE `temp_rankings` (
   `date` date NOT NULL,
   `place` int(11) NOT NULL,
   `score` decimal(8,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `hidden_players`
+--
+
+CREATE TABLE `hidden_players` (
+  `pid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
 
 --
@@ -81,6 +92,12 @@ ALTER TABLE `temp_rankings`
   ADD PRIMARY KEY (`pid`,`date`);
 
 --
+-- Indexes for table `hidden_players`
+--
+ALTER TABLE `hidden_players`
+  ADD PRIMARY KEY (`pid`);
+
+--
 -- Ograniczenia dla zrzutów tabel
 --
 
@@ -95,3 +112,9 @@ ALTER TABLE `rankings`
 --
 ALTER TABLE `temp_rankings`
   ADD CONSTRAINT `temp_rankings_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `players` (`id`) ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `hidden_players`
+--
+ALTER TABLE `hidden_players`
+  ADD CONSTRAINT `hidden_players_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

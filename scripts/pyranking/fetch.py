@@ -9,7 +9,8 @@ def fetch_ranking(date, assoc=False):
     rankings.region, rankings.club,
     REPLACE(rankings.flags, "K", "") age,
     IF(rankings.flags LIKE 'K%', "K", "") gender,
-    rankings.score
+    rankings.score,
+    rankings.hidden
 FROM rankings
 JOIN players
     ON players.id = rankings.pid

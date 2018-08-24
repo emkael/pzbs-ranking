@@ -142,31 +142,48 @@ var ranking = {
 
     buildTableRow: function(row) {
         var tableRow = ranking.tableRowTemplate.clone(true);
-        tableRow.find('td.pid').text(row['pid']);
-        tableRow.find('td.pidlink a').attr(
-            'href',
-            'https://msc.com.pl/cezar/?p=21&pid=' + row['pid']
-        );
-        tableRow.find('td.name').text(row['player']);
-        tableRow.find('td.club').text(row['club']);
-        ['gender', 'age', 'region'].forEach(function(category) {
-            tableRow.find('td.' + category).text(row[category]);
-            var categoryPlace = tableRow.find('td.' + category + '-place');
-            categoryPlace.find('.rank').text(row[category + '-place']);
-            var badge = categoryPlace.find('.change');
-            badge.text(row[category + '-change']);
-            badge.addClass('label-' + row[category + '-change-class']);
-            if (row[category + '-place'] == 1) {
-                tableRow.addClass('info');
-            }
-        });
-        var scoreCell = tableRow.find('td.ranking span');
-        scoreCell.attr('title', row['score']);
-        scoreCell.text(row['score'].toFixed(2));
-        tableRow.find('td.place .rank').text(row['place']);
-        var badge = tableRow.find('td.place .change');
-        badge.text(row['place-change']);
-        badge.addClass('label-' + row['place-change-class']);
+        var filterCategories = ['gender', 'age', 'region'];
+        if (row['pid']) {
+            tableRow.find('td.pid').text(row['pid']);
+            tableRow.find('td.pidlink a').attr(
+                'href',
+                'https://msc.com.pl/cezar/?p=21&pid=' + row['pid']
+            );
+            tableRow.find('td.name').text(row['player']);
+            tableRow.find('td.club').text(row['club']);
+            filterCategories.forEach(function(category) {
+                tableRow.find('td.' + category).text(row[category]);
+                var categoryPlace = tableRow.find('td.' + category + '-place');
+                categoryPlace.find('.rank').text(row[category + '-place']);
+                var badge = categoryPlace.find('.change');
+                badge.text(row[category + '-change']);
+                badge.addClass('label-' + row[category + '-change-class']);
+                if (row[category + '-place'] == 1) {
+                    tableRow.addClass('info');
+                }
+            });
+            var scoreCell = tableRow.find('td.ranking span');
+            scoreCell.attr('title', row['score']);
+            scoreCell.text(row['score'].toFixed(2));
+            tableRow.find('td.place .rank').text(row['place']);
+            var badge = tableRow.find('td.place .change');
+            badge.text(row['place-change']);
+            badge.addClass('label-' + row['place-change-class']);
+        } else {
+            var columnCnt = 0;
+            tableRow.find('td').each(function(idx) {
+                if (idx > 0) {
+                    $(this).remove();
+                    columnCnt++;
+                }
+            });
+            var fillerRow = $('<td>').attr('colspan', columnCnt);
+            filterCategories.forEach(function(category) {
+                fillerRow.attr('data-' + category, row.category);
+            });
+            tableRow.append(fillerRow);
+            tableRow.find('.rank').text(row['place']);
+        }
         return tableRow;
     },
 
