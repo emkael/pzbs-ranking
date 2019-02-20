@@ -1,11 +1,12 @@
 import copy, json, sys
+from collections import OrderedDict
 
 from bs4 import BeautifulSoup as bs4
 
 dates_config = json.load(file('config/dates.json'))
 output_file = bs4(file(sys.argv[1]), 'lxml')
 
-editions = {}
+editions = OrderedDict()
 for date_config in dates_config:
     year = date_config['name'].split(' ')[1]
     if year not in editions:
@@ -30,7 +31,7 @@ for year, dates in editions.iteritems():
         link['href'] = date[1]
         link['datetime'] = date[2]
         group.append(link)
-    date_group.append(group)
+    date_group.insert(0, group)
 
 output_file.select('#editions')[0].replace_with(date_group)
 file(sys.argv[1], 'w').write(output_file.prettify().encode('utf-8'))
