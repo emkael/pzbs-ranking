@@ -31,6 +31,7 @@ for date in sorted(dates.keys()):
                 players[player]['rankings'][date][field + '-change'] = 'N'
                 players[player]['rankings'][date][field + '-change-class'] = 'primary'
 
+pcount = 0
 for pid, player in players.iteritems():
     template = bs4(file('templates/player.html'), 'lxml')
     template.select('h2.name')[0].insert(0, player['name'])
@@ -97,3 +98,6 @@ for pid, player in players.iteritems():
     menu.append(copy.copy(menu_content))
 
     file(os.path.join(output_directory, '%d.html' % pid), 'w').write(template.prettify().encode('utf-8'))
+    pcount += 1
+    sys.stdout.write("[%d/%d]\r" % (pcount, len(players)))
+    sys.stdout.flush()
