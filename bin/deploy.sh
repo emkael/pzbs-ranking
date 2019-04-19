@@ -8,3 +8,4 @@ then
 else
     rsync $RSYNCOPTS $LOCALPATH/ $DEPLOYPATH
 fi
+echo 'Remember to push CSV datafiles to GitHub!'
