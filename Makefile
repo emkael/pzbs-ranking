@@ -8,6 +8,7 @@ rankings: datafiles menus tables editions group-json
 
 datafiles:
 	bin/datafiles-build.sh config/dates.json http/_data
+	bin/datafiles-htaccess.sh config/dates.json http/.htaccess
 
 menus:
 	bin/menus-build.sh config/static.json http
