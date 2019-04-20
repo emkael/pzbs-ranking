@@ -3,7 +3,6 @@ CONFIG=$1
 HTACCESS_FILE=$2
 cat $HTACCESS_FILE |
     sed -e '/^# auto-generated from this point below$/,$d' > $HTACCESS_FILE.tmp
-echo '' >> $HTACCESS_FILE.tmp
 echo '# auto-generated from this point below' >> $HTACCESS_FILE.tmp
 cat $CONFIG |
     jq -r '.[] | .date, .url' | xargs -n 2 |
