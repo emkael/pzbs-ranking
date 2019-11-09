@@ -21,6 +21,12 @@ style_href['href'] = '%s?%d' % ('_res/ranking.css', os.path.getmtime('http/_res/
 rawlink = table.select('a#rawlink')[0]
 rawlink['href'] = '%s/%s.csv' % (rawlink['href'], ranking_date)
 
+age_menu = sys.argv[5]
+age_menu_file = file('templates/menu-age-%s.html' % (age_menu))
+age_menu_placeholder = table.select('div[data-menu="age"]')[0]
+age_menu_placeholder.clear()
+age_menu_placeholder.append(bs4(age_menu_file, 'html.parser'))
+
 menu_file = file(sys.argv[3])
 menu = table.select('div.static-menu')[0]
 menu.clear()
