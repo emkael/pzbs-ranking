@@ -1,22 +1,13 @@
-import copy, os, sys
+import os, sys
 import simplejson as json
-from bs4 import BeautifulSoup as bs4
 from math import ceil
 from pyranking.fetch import fetch_ranking
 
-output_directory = sys.argv[1]
+output_directory = sys.argv[2]
 pagesize = 100.0
 
-template = bs4(file('templates/player.html'), 'lxml')
-menu_file = sys.argv[2]
-menu_content = bs4(file(menu_file), 'html.parser')
-menu = template.select('div.static-menu')[0]
-menu.append(copy.copy(menu_content))
-
-file(os.path.join(output_directory, 'index.html'), 'w').write(template.prettify().encode('utf-8'))
-
 dates = {}
-for date_config in json.load(file('config/dates.json')):
+for date_config in json.load(file(sys.argv[1])):
     dates[date_config['date']] = date_config['url']
 
 players = {}

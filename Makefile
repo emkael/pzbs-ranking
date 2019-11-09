@@ -21,10 +21,14 @@ editions: $(rankfiles)
 $(rankfiles):
 	python scripts/rankings-editions.py $(patsubst %.ed,%,$@)
 
-players: menus player-pages
+players: player-pages player-data
 
-player-pages:
-	bin/players-build.sh http
+player-pages: menus
+	mkdir -p http/players
+	python scripts/players-prepare-template.py http/players http/players/.menu.html
+
+player-data:
+	python scripts/players-compile.py config/dates.json http/players
 
 statics:
 	python scripts/menus-compile.py config/static.json http http > http/.menu.html
