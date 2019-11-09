@@ -7,7 +7,7 @@ REPLACE
 INTO TABLE temp_rankings
 FIELDS TERMINATED BY ',';
 INSERT INTO rankings (
-       SELECT pid, \`date\`, place, score, region, flags, rank, club, 0
+       SELECT pid, \`date\`, place, score, region, gender, flags, rank, club, 0
        FROM temp_rankings
        JOIN players
             ON players.id = temp_rankings.pid
