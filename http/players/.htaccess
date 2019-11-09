@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule '^\d+\.html$' index.html
