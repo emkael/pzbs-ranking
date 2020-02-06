@@ -14,6 +14,7 @@ menus:
 	bin/menus-build.sh config/static.json http
 
 tables:
+	find http -type l -delete
 	bin/rankings-tables-build.sh config/dates.json http
 
 editions: $(rankfiles)
