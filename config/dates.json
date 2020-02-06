@@ -74,8 +74,8 @@
     {
         "date": "2019-12-31",
         "menu_age": "new",
-        "url": "index.html",
-        "links": ["2020-01.html"],
+        "url": "2020-01.html",
+        "links": ["index.html"],
         "name": "I 2020",
         "index": "13"
     }
