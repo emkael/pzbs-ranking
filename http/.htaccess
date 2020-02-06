@@ -1,5 +1,6 @@
-RewriteEngine On
+DirectoryIndex index.html
 
+RewriteEngine On
 
 # auto-generated from this point below
 RewriteRule 2017-01.json _data/2016-12-31.json [L]
@@ -38,6 +39,9 @@ RewriteRule 2019-03.csv https://raw.githubusercontent.com/emkael/pzbs-ranking/ma
 RewriteRule 2019-04.json _data/2019-09-30.json [L]
 RewriteRule 2019-04.minimal.json _data/2019-09-30.minimal.json [L]
 RewriteRule 2019-04.csv https://raw.githubusercontent.com/emkael/pzbs-ranking/master/data/rankings/2019-09-30.csv [R,L]
+RewriteRule 2020-01.json _data/2019-12-31.json [L]
+RewriteRule 2020-01.minimal.json _data/2019-12-31.minimal.json [L]
+RewriteRule 2020-01.csv https://raw.githubusercontent.com/emkael/pzbs-ranking/master/data/rankings/2019-12-31.csv [R,L]
 RewriteRule index.json _data/2019-12-31.json [L]
 RewriteRule index.minimal.json _data/2019-12-31.minimal.json [L]
 RewriteRule index.csv https://raw.githubusercontent.com/emkael/pzbs-ranking/master/data/rankings/2019-12-31.csv [R,L]
