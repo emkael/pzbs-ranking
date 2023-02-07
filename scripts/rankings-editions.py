@@ -3,8 +3,8 @@ from collections import OrderedDict
 
 from bs4 import BeautifulSoup as bs4
 
-dates_config = json.load(file('config/dates.json'))
-output_file = bs4(file(sys.argv[1]), 'lxml')
+dates_config = json.load(open('config/dates.json'))
+output_file = bs4(open(sys.argv[1]), 'lxml')
 
 editions = OrderedDict()
 for date_config in dates_config:
@@ -17,12 +17,12 @@ for date_config in dates_config:
         date_config['date']
     ))
 
-template = bs4(file('templates/ranking.html'), 'lxml')
+template = bs4(open('templates/ranking.html'), 'lxml')
 
 date_group = template.select('#editions')[0].extract()
 year_group = date_group.select('div[role="group"]')[0].extract()
 ranking_link = year_group.select('.btn-default')[0].extract()
-for year, dates in editions.iteritems():
+for year, dates in editions.items():
     group = copy.copy(year_group)
     group.select('.year')[0].string = str(year)
     for date in dates[::-1]:
@@ -34,4 +34,4 @@ for year, dates in editions.iteritems():
     date_group.insert(0, group)
 
 output_file.select('#editions')[0].replace_with(date_group)
-file(sys.argv[1], 'w').write(output_file.prettify().encode('utf-8'))
+open(sys.argv[1], 'w').write(output_file.prettify())

@@ -15,7 +15,7 @@ while True:
     if len(arguments) == 0:
         break
 
-template = bs4(file('templates/static.html'), 'lxml')
+template = bs4(open('templates/static.html'), 'lxml')
 
 content_wrapper = template.find('div', {'id': 'wrapper'}).extract()
 del content_wrapper['id']
@@ -27,8 +27,8 @@ footer = template.find('div', {'id': 'footer'})
 for content_file in content_files:
     content = copy.copy(content_wrapper)
     content.div.append(
-        bs4(file(content_file).read(), 'html.parser')
+        bs4(open(content_file).read(), 'html.parser')
     )
     footer.insert_before(content)
 
-print template.prettify().encode('utf-8')
+print(template.prettify())

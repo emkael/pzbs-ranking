@@ -20,33 +20,33 @@ tables:
 editions: $(rankfiles)
 
 $(rankfiles):
-	python scripts/rankings-editions.py $(patsubst %.ed,%,$@)
+	python3 scripts/rankings-editions.py $(patsubst %.ed,%,$@)
 
 players: player-pages player-data
 
 player-pages: menus
 	mkdir -p http/players
-	python scripts/players-prepare-template.py http/players http/players/.menu.html
+	python3 scripts/players-prepare-template.py http/players http/players/.menu.html
 
 player-data:
-	python scripts/players-compile.py config/dates.json http/players
+	python3 scripts/players-compile.py config/dates.json http/players
 
 statics:
-	python scripts/menus-compile.py config/static.json http http > http/.menu.html
+	python3 scripts/menus-compile.py config/static.json http http > http/.menu.html
 	bin/statics-generate.sh config/static.json static http
 
 group-json:
 	bin/group-tools-json.sh config/dates.json http
 
 group-tools:
-	python scripts/statics-compile.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
-	python scripts/menus-compile.py config/static.json http http > http/.menu.html
-	python scripts/menus-write.py http/ranking-grupowy.html http/.menu.html
+	python3 scripts/statics-compile.py static/group-intro.html static/group-form-loading.html static/group-form.html > http/ranking-grupowy.html
+	python3 scripts/menus-compile.py config/static.json http http > http/.menu.html
+	python3 scripts/menus-write.py http/ranking-grupowy.html http/.menu.html
 
 minimize: $(tmpfiles)
 
 $(tmpfiles):
-	python -m htmlmin.command $(patsubst %.tmp,%,$@) $@
+	python3 -m htmlmin.command $(patsubst %.tmp,%,$@) $@
 	mv $@ $(patsubst %.tmp,%,$@)
 
 deploy:

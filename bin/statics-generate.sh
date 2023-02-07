@@ -10,7 +10,7 @@ cat $1 |
         read OUTPUT_FILE
         if [ -n "$CONTENT_FILE" ]
         then
-            python scripts/statics-compile.py $CONTENT_DIR/$CONTENT_FILE "$HEADER" > $OUTPUT_DIR/$OUTPUT_FILE
-            python scripts/menus-write.py $OUTPUT_DIR/$OUTPUT_FILE $OUTPUT_DIR/.menu.html
+            python3 scripts/statics-compile.py $CONTENT_DIR/$CONTENT_FILE "$HEADER" > $OUTPUT_DIR/$OUTPUT_FILE
+            python3 scripts/menus-write.py $OUTPUT_DIR/$OUTPUT_FILE $OUTPUT_DIR/.menu.html
         fi
     done

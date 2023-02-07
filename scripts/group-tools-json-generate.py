@@ -28,4 +28,4 @@ for row in cursor.fetchall():
             'rank': float(row['rank'])
         }
 
-print json.dumps(result)
+print(json.dumps(result))

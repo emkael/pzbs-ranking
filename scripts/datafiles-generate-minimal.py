@@ -12,4 +12,4 @@ for row in ranking:
         'r': float(row['score'])
     }
 
-print json.dumps(output)
+print(json.dumps(output))

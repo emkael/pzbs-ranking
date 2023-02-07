@@ -36,4 +36,4 @@ for row in ranking:
             if isinstance(row[field], Decimal):
                 row[field] = float(row[field])
 
-print json.dumps(ranking)
+print(json.dumps(ranking))

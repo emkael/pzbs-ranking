@@ -1,8 +1,8 @@
 import csv, sys
 
-data = list(csv.reader(file(sys.argv[1]), delimiter=";"))
+data = list(csv.reader(open(sys.argv[1], encoding='cp1250'), delimiter=";"))
 
-output = csv.writer(file(sys.argv[2], 'w'))
+output = csv.writer(open(sys.argv[2], 'w'))
 
 date = data[1][3]
 for row in data[4:-1]:

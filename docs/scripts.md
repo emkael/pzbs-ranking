@@ -68,7 +68,7 @@ bin/hidden-import.sh data/hidden.csv
 followed by:
 
 ```
-python scripts/rankings-csv-convert.py data/rankings/imports/DATE.csv data/rankings/DATE.csv
+python3 scripts/rankings-csv-convert.py data/rankings/imports/DATE.csv data/rankings/DATE.csv
 bin/rankings-csv-import.sh data/rankings/DATE.csv
 ```
 

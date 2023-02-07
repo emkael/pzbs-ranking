@@ -7,13 +7,13 @@ output_directory = sys.argv[2]
 pagesize = 100.0
 
 dates = {}
-for date_config in json.load(file(sys.argv[1])):
+for date_config in json.load(open(sys.argv[1])):
     dates[date_config['date']] = date_config['url']
 
 players = {}
 
 for date in sorted(dates.keys()):
-    for player, ranking in fetch_ranking(date, True).iteritems():
+    for player, ranking in fetch_ranking(date, True).items():
         if not ranking['hidden']:
             if player not in players:
                 players[player] = {'rankings':{}}
@@ -29,14 +29,14 @@ for date in sorted(dates.keys()):
                 players[player]['rankings'][date][field + '-change-class'] = 'primary'
 
 pcount = 0
-for pid, player in players.iteritems():
+for pid, player in players.items():
     player['url'] = 'https://msc.com.pl/cezar/?p=21&pid=%d' % (pid)
     for date in dates:
         if date not in player['rankings']:
             player['rankings'][date] = {'place': None}
 
     prev = None
-    for date, ranking in sorted(player['rankings'].iteritems(), lambda x,y: cmp(x[0], y[0])):
+    for date, ranking in [(d, player['rankings'][d]) for d in sorted(player['rankings'])]:
         if prev is not None and prev['place'] is not None and ranking['place'] is not None:
             ranking['change'] = prev['place'] - ranking['place']
             for field in ['gender', 'age', 'region']:
@@ -71,7 +71,7 @@ for pid, player in players.iteritems():
                         field, ranking[field]
                     )
 
-    json.dump(player, file(os.path.join(output_directory, '%d.json' % pid), 'w'))
+    json.dump(player, open(os.path.join(output_directory, '%d.json' % pid), 'w'))
 
     pcount += 1
     sys.stdout.write("[%d/%d]\r" % (pcount, len(players)))

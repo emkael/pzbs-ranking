@@ -7,7 +7,7 @@ INDEX=$4
 AGEMENU=$5
 NAME=$6
 
-python scripts/rankings-tables-compile.py "$NAME" $INDEX $DIR/.menu.html $DATE "$AGEMENU" > $DIR/$URL
+python3 scripts/rankings-tables-compile.py "$NAME" $INDEX $DIR/.menu.html $DATE "$AGEMENU" > $DIR/$URL
 
 shift 6
 LINKS=$@
