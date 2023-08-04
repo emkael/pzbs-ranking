@@ -100,15 +100,31 @@ var ranking = {
     filterRows : function(params) {
         $('table.data-table tbody tr').remove();
         var displayRows = [];
+        const collator = new Intl.Collator('pl', {sensitivity: 'base', usage: 'search'});
+        var contains = function(haystack, needle) {
+            if (needle.length === 0) {
+                return true;
+            }
+            haystack = haystack.normalize('NFC');
+            needle = needle.normalize('NFC');
+            let scan = 0;
+            for (; scan + needle.length <= haystack.length; scan += 1) {
+                const slice = haystack.slice(scan, scan + needle.length);
+                if (collator.compare(needle, slice) === 0) {
+                    return true;
+                }
+            }
+            return false;
+        };
         ranking.rankingData.forEach(function(row) {
             var hidden = false;
             params.forEach(function(value, param) {
                 if (param == 'name') {
-                    if (row['player'].trim().toLowerCase().search(value.join('')) == -1) {
+                    if (!contains(row['player'].trim(), value.join(''))) {
                         hidden = true;
                     }
                 } else if (param == 'club') {
-                    if (row['club'].trim().toLowerCase().search(value.join('')) == -1) {
+                    if (!contains(row['club'].trim(), value.join(''))) {
                         hidden = true;
                     }
                 } else if (param.substr(0, 4) != 'page') {
