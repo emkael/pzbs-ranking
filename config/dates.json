@@ -166,8 +166,15 @@
         "date": "2023-12-31",
         "menu_age": "new",
         "url": "2023-04.html",
-        "links": ["index.html"],
         "name": "IV 2023",
         "index": "26"
+    },
+    {
+        "date": "2024-03-31",
+        "menu_age": "new",
+        "url": "2024-01.html",
+        "links": ["index.html"],
+        "name": "I 2024",
+        "index": "27"
     }
 ]
