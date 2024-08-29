@@ -173,8 +173,15 @@
         "date": "2024-03-31",
         "menu_age": "new",
         "url": "2024-01.html",
-        "links": ["index.html"],
         "name": "I 2024",
         "index": "27"
+    },
+    {
+        "date": "2024-06-30",
+        "menu_age": "new",
+        "url": "2024-02.html",
+        "links": ["index.html"],
+        "name": "II 2024",
+        "index": "28"
     }
 ]
