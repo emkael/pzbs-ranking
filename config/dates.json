@@ -229,8 +229,15 @@
         "date": "2026-03-31",
         "menu_age": "new",
         "url": "2026-01.html",
-        "links": ["index.html"],
         "name": "I 2026",
         "index": "35"
+    },
+    {
+        "date": "2026-06-30",
+        "menu_age": "new",
+        "url": "2026-02.html",
+        "links": ["index.html"],
+        "name": "II 2026",
+        "index": "36"
     }
 ]
